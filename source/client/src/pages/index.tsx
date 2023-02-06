@@ -6,7 +6,7 @@ import { Search } from '@/components/common/Search/search';
 const roboto = Roboto({ weight: '400', subsets: ['latin'] });
 const robotoLight = Roboto({ weight: '300', subsets: ['latin'] });
 
-export default function HomePage() {
+export default function Home() {
   return (
     <>
       <Head>
