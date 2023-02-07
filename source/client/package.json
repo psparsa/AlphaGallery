@@ -50,6 +50,7 @@
     "lint-staged": "12.1.4",
     "postcss": "8.4.21",
     "prettier": "2.8.3",
+    "prettier-plugin-tailwindcss": "0.2.2",
     "storybook": "^6.5.16",
     "storybook-addon-next": "1.7.1",
     "tailwind-merge": "1.9.1",
