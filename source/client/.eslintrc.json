@@ -12,5 +12,16 @@
     "plugin:@typescript-eslint/strict",
     "plugin:unicorn/all",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "extendDefaultAllowList": false,
+        "allowList": {
+          "Props": true
+        }
+      }
+    ]
+  }
 }
