@@ -1,9 +1,7 @@
 import Head from 'next/head';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
-import { Search } from '@/components/common/Search/search';
-import { ScrollButton } from '@/components/common/scroll-button/scroll-button';
-import { Pagination } from '@/components/common/pagination';
+import { Search, ScrollButton } from '@/components';
 
 const roboto = Roboto({ weight: '400', subsets: ['latin'] });
 const robotoLight = Roboto({ weight: '300', subsets: ['latin'] });
