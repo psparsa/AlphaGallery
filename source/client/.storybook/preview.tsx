@@ -1,5 +1,9 @@
+import React from 'react';
+
 import '../src/styles/globals.css';
 import * as NextImage from 'next/image';
+import { DecoratorFn, Parameters } from '@storybook/react';
+import { Layout } from '../src/components';
 
 const OriginalNextImage = NextImage.default;
 
@@ -8,7 +12,7 @@ Object.defineProperty(NextImage, 'default', {
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 });
 
-export const parameters = {
+export const parameters: Parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
@@ -20,3 +24,11 @@ export const parameters = {
     'storybook/docs/panel': { index: -1 },
   },
 };
+
+export const decorators: DecoratorFn[] = [
+  (Story) => (
+    <Layout>
+      <Story />
+    </Layout>
+  ),
+];
