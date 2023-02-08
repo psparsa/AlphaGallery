@@ -12,8 +12,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "eslint",
-      "prettier --write --ignore-unknown"
+      "eslint --fix"
     ]
   },
   "resolutions": {
