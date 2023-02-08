@@ -3,6 +3,7 @@ import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
 import { Search } from '@/components/common/search/search';
 import { ScrollButton } from '@/components/common/scroll-button/scroll-button';
+import { Pagination } from '@/components/common/pagination';
 
 const roboto = Roboto({ weight: '400', subsets: ['latin'] });
 const robotoLight = Roboto({ weight: '300', subsets: ['latin'] });
@@ -19,27 +20,27 @@ export default function Home() {
       <main
         className={twMerge(
           roboto.className,
-          'w-screen min-h-screen flex flex-col items-center',
+          'flex min-h-screen w-screen flex-col items-center',
           'bg-chineseBlack text-snow'
         )}
       >
         <div
-          className="w-screen min-h-screen flex flex-col items-center
+          className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-chineseBlackVoid"
         >
           <div
-            className="w-full flex flex-col flex-1 items-center
+            className="flex w-full flex-1 flex-col items-center
         justify-center"
           >
             <div
               className={twMerge(
                 robotoLight.className,
-                'sm:text-7xl text-6xl text-coralRed text-center '
+                'text-center text-6xl text-coralRed sm:text-7xl '
               )}
             >
               Alpha Gallery
             </div>
-            <div className="text-begonia mt-4">
+            <div className="mt-4 text-begonia">
               Explore and Upload Images just by a few clicks...
             </div>
             <Search containerClassName="mt-16" />
@@ -49,7 +50,7 @@ export default function Home() {
         </div>
 
         <div
-          className="w-screen min-h-screen flex flex-col items-center
+          className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-gradient-to-b from-chineseBlackVoid to-chineseBlack"
         ></div>
       </main>
