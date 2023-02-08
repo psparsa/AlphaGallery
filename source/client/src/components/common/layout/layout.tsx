@@ -20,7 +20,7 @@ export const Layout = ({ children }: Props) => {
       <main
         className={twMerge(
           roboto.className,
-          'w-screen min-h-screen flex flex-col',
+          'w-screen min-h-screen flex flex-col font-light',
           'bg-chineseBlack text-snow'
         )}
       >
