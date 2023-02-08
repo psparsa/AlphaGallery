@@ -15,16 +15,7 @@
     "prettier"
   ],
   "rules": {
-    "unicorn/prevent-abbreviations": [
-      "error",
-      {
-        "extendDefaultAllowList": false,
-        "allowList": {
-          "env": true,
-          "Props": true
-        }
-      }
-    ],
+    "unicorn/prevent-abbreviations": "off",
     "prettier/prettier": "error"
   }
 }
