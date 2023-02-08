@@ -31,7 +31,7 @@ export const Search = ({
     <div
       className={twMerge(
         containerClassName,
-        'w-80 sm:w-96 lg:w-2/5 h-10 rounded-3xl bg-snow flex overflow-hidden'
+        'flex h-10 w-80 overflow-hidden rounded-3xl bg-snow sm:w-96 lg:w-2/5'
       )}
     >
       <input
@@ -41,10 +41,10 @@ export const Search = ({
         onChange={handleInputChange}
         onKeyDown={handleInputKeyDown}
         placeholder="What are you looking for?"
-        className="bg-snow text-chineseBlack px-4 flex-1"
+        className="flex-1 bg-snow px-4 text-chineseBlack"
       />
       <button
-        className="w-12 bg-taupeGray flex items-center justify-center"
+        className="flex w-12 items-center justify-center bg-taupeGray"
         onClick={onSearch}
         disabled={value.length === 0}
       >

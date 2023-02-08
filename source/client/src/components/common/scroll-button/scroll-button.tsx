@@ -15,11 +15,11 @@ export const ScrollButton = ({
     <div
       className={twMerge(
         containerClassName,
-        'w-5 h-10 rounded-full border-2 border-snow border-solid flex justify-center items-end cursor-pointer'
+        'flex h-10 w-5 cursor-pointer items-end justify-center rounded-full border-2 border-solid border-snow'
       )}
       onClick={handleScroll}
     >
-      <div className="h-4 mb-1 border border-snow border-solid"></div>
+      <div className="mb-1 h-4 border border-solid border-snow"></div>
     </div>
   );
 };
