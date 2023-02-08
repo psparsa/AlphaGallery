@@ -1,4 +1,4 @@
-import { Search, ScrollButton, Card, Layout } from '@/components';
+import { Search, ScrollButton, Layout } from '@/components';
 
 export default function Home() {
   return (
@@ -26,9 +26,7 @@ export default function Home() {
       <div
         className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-gradient-to-b from-chineseBlackVoid to-chineseBlack"
-      >
-        <Card />
-      </div>
+      ></div>
     </Layout>
   );
 }
