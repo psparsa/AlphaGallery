@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import CatImage from '@/assets/cat.jpeg';
 import { Badge } from '../badge';
+import { Button } from '../button';
 
 export const Card = () => {
   return (
@@ -24,9 +25,7 @@ export const Card = () => {
             </div>
           </div>
           <div className="py-3">
-            <button className="w-full rounded-2xl bg-coralRed p-2.5 font-normal hover:bg-opacity-80 active:bg-opacity-70 ">
-              Download
-            </button>
+            <Button>Download</Button>
           </div>
         </div>
       </div>
