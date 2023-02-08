@@ -3,7 +3,6 @@ import React from 'react';
 import '../src/styles/globals.css';
 import * as NextImage from 'next/image';
 import { DecoratorFn, Parameters } from '@storybook/react';
-import { Layout } from '../src/components';
 
 const OriginalNextImage = NextImage.default;
 
@@ -27,8 +26,8 @@ export const parameters: Parameters = {
 
 export const decorators: DecoratorFn[] = [
   (Story) => (
-    <Layout>
+    <div className="font-light text-snow">
       <Story />
-    </Layout>
+    </div>
   ),
 ];

@@ -3,5 +3,5 @@ interface Props {
 }
 
 export const Badge = ({ children }: Props) => {
-  return <p className="rounded-xl bg-chineseBlack px-3">{children}</p>;
+  return <span className="rounded-xl bg-chineseBlack px-3">{children}</span>;
 };

@@ -5,7 +5,7 @@ interface Props {
 
 const colorVariants = {
   red: 'bg-coralRed',
-  dark: 'bg-coralRed',
+  dark: 'bg-gunmetal',
 } as const;
 
 export const Button = ({ children, variant = 'red' }: Props) => {
