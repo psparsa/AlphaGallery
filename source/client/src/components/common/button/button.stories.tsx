@@ -9,9 +9,9 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = (args) => (
+const Template: ComponentStory<typeof Button> = (arguments_) => (
   <div className="w-52">
-    <Button {...args} />
+    <Button {...arguments_} />
   </div>
 );
 

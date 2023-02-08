@@ -1,4 +1,4 @@
-interface Props {
+interface Properties {
   children: React.ReactNode;
   variant?: 'dark' | 'red';
 }
@@ -8,7 +8,7 @@ const colorVariants = {
   dark: 'bg-gunmetal',
 } as const;
 
-export const Button = ({ children, variant = 'red' }: Props) => {
+export const Button = ({ children, variant = 'red' }: Properties) => {
   return (
     <button
       className={`w-full rounded-2xl ${colorVariants[variant]} p-2.5 font-normal hover:bg-opacity-80 active:bg-opacity-70`}

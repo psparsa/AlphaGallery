@@ -2,13 +2,13 @@ import { Roboto } from '@next/font/google';
 import Head from 'next/head';
 import { twMerge } from 'tailwind-merge';
 
-interface Props {
+interface Properties {
   children: React.ReactNode;
 }
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
-export const Layout = ({ children }: Props) => {
+export const Layout = ({ children }: Properties) => {
   return (
     <>
       <Head>

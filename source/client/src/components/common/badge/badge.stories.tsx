@@ -6,7 +6,9 @@ export default {
   component: Badge,
 } as ComponentMeta<typeof Badge>;
 
-const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
+const Template: ComponentStory<typeof Badge> = (arguments_) => (
+  <Badge {...arguments_} />
+);
 export const Default = Template.bind({});
 Default.args = {
   children: 'animal',
