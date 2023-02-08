@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import CatImage from '@/assets/cat.jpeg';
+import { Badge } from '../badge';
 
 export const Card = () => {
   return (
@@ -17,9 +18,9 @@ export const Card = () => {
           <div className="flex flex-row">
             <p className="font-normal">Categories:</p>
             <div className="flex flex-row gap-x-3 pl-3">
-              <p className="rounded-xl bg-chineseBlack px-3">cats</p>
-              <p className="rounded-xl bg-chineseBlack px-3">cute</p>
-              <p className="rounded-xl bg-chineseBlack px-3">animals</p>
+              <Badge>cats</Badge>
+              <Badge>cute</Badge>
+              <Badge>animals</Badge>
             </div>
           </div>
           <div className="py-3">
