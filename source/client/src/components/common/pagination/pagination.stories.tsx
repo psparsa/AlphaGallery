@@ -14,3 +14,7 @@ export const Default: ComponentStory<typeof Pagination> = Template.bind({});
 Default.parameters = {
   backgrounds: { default: 'dark' },
 };
+Default.args = {
+  numberOfPages: 15,
+  defaultPage: 5,
+};
