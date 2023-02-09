@@ -3,57 +3,42 @@ import { twMerge } from 'tailwind-merge';
 
 interface Properties {
   defaultPage?: number;
-  numberOfPages: number;
   onChange?: (page: number) => void;
+  pagesCount: number;
+  visiblePagesCount?: number;
 }
 
 export const Pagination = ({
   defaultPage,
-  numberOfPages,
+  pagesCount,
   onChange,
+  visiblePagesCount = 5,
 }: Properties) => {
   const [currentPage, setCurrentPage] = useState(defaultPage ?? 1);
 
-  const pages = Array.from({ length: numberOfPages }, (_, index) => index + 1);
+  const getVisiblePagesIndexes = () => {
+    const pages = Array.from({ length: pagesCount }, (_, index) => index + 1);
+    const sidePageCount = Math.floor((visiblePagesCount - 1) / 2);
 
-  const getPageItems = () => {
-    const items = [
-      ...pages.slice(Math.max(currentPage - 3, 0), currentPage - 1),
-      currentPage,
-      ...pages.slice(currentPage, currentPage + 2),
-    ];
+    const expectedEnd = currentPage + sidePageCount;
+    const expectedStart = currentPage - 1 - sidePageCount;
 
-    if (currentPage <= 2)
-      return [
-        ...items,
-        ...pages.slice(
-          currentPage + 2,
-          currentPage + (currentPage === 1 ? 4 : 3)
-        ),
-      ];
+    const start =
+      expectedEnd > pagesCount ? visiblePagesCount : Math.max(expectedStart, 0);
 
-    if (currentPage >= numberOfPages - 1)
-      return [
-        ...pages.slice(
-          currentPage - (currentPage === numberOfPages ? 5 : 4),
-          currentPage - 3
-        ),
-        ...items,
-      ];
+    const end =
+      expectedStart < 0 ? visiblePagesCount : Math.min(expectedEnd, pagesCount);
 
-    return items;
+    return pages.slice(start, end);
   };
 
-  const handleChangingPage = (action: 'next' | 'previous') =>
-    setCurrentPage((p) => {
-      const result = (() => {
-        if (action === 'previous' && p > 1) return p - 1;
-        if (action === 'next' && p < numberOfPages) return p + 1;
-        return p;
-      })();
+  const goNextPage = () => {
+    if (currentPage > 1) setCurrentPage((p) => p + 1);
+  };
 
-      return result;
-    });
+  const goPreviousPage = () => {
+    if (currentPage < pagesCount) setCurrentPage((p) => p - 1);
+  };
 
   useEffect(() => {
     setCurrentPage(defaultPage ?? 1);
@@ -63,6 +48,8 @@ export const Pagination = ({
     onChange?.(currentPage);
   }, [currentPage, onChange]);
 
+  const visiblePages = getVisiblePagesIndexes();
+
   const CHANGE_PAGE_BUTTONS_CLASSES = `mx-5 flex w-24 cursor-pointer select-none justify-center 
     rounded-3xl border border-solid border-coralRed py-2 text-snow`;
 
@@ -70,12 +57,12 @@ export const Pagination = ({
     <div className="flex flex-col items-center justify-center sm:flex-row">
       <div
         className={twMerge(CHANGE_PAGE_BUTTONS_CLASSES, 'mb-4 sm:mb-0')}
-        onClick={() => handleChangingPage('previous')}
+        onClick={goPreviousPage}
       >
         Previous
       </div>
       <div className="flex">
-        {getPageItems().map((v) => (
+        {visiblePages.map((v) => (
           <div
             onClick={() => setCurrentPage(v)}
             className={twMerge(
@@ -90,7 +77,7 @@ export const Pagination = ({
       </div>
       <div
         className={twMerge(CHANGE_PAGE_BUTTONS_CLASSES, 'mt-4 sm:mt-0')}
-        onClick={() => handleChangingPage('next')}
+        onClick={goNextPage}
       >
         Next
       </div>
