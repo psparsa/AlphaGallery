@@ -15,6 +15,6 @@ Default.parameters = {
   backgrounds: { default: 'dark' },
 };
 Default.args = {
-  numberOfPages: 15,
+  pagesCount: 15,
   defaultPage: 5,
 };
