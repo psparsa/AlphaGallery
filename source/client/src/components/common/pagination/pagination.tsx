@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Properties {
@@ -12,7 +12,7 @@ export const Pagination = ({
   numberOfPages,
   onChange,
 }: Properties) => {
-  const [currentPage, setCurrentPage] = React.useState(defaultPage ?? 1);
+  const [currentPage, setCurrentPage] = useState(defaultPage ?? 1);
 
   const pages = Array.from({ length: numberOfPages }, (_, index) => index + 1);
 
@@ -44,11 +44,6 @@ export const Pagination = ({
     return items;
   };
 
-  const handleSelectPage = (page: number) => {
-    setCurrentPage(page);
-    if (onChange) onChange(page);
-  };
-
   const handleChangingPage = (action: 'next' | 'previous') =>
     setCurrentPage((p) => {
       const result = (() => {
@@ -57,13 +52,16 @@ export const Pagination = ({
         return p;
       })();
 
-      if (onChange) onChange(result);
       return result;
     });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrentPage(defaultPage ?? 1);
   }, [defaultPage]);
+
+  useEffect(() => {
+    onChange?.(currentPage);
+  }, [currentPage, onChange]);
 
   const CHANGE_PAGE_BUTTONS_CLASSES = `mx-5 flex w-24 cursor-pointer select-none justify-center 
     rounded-3xl border border-solid border-coralRed py-2 text-snow`;
@@ -79,12 +77,10 @@ export const Pagination = ({
       <div className="flex">
         {getPageItems().map((v) => (
           <div
-            onClick={() => handleSelectPage(v)}
+            onClick={() => setCurrentPage(v)}
             className={twMerge(
               `mx-1 flex h-10 w-10 cursor-pointer select-none items-center justify-center rounded-lg text-snow`,
-              currentPage === v
-                ? 'border border-solid border-coralRed'
-                : undefined
+              currentPage === v ? 'border border-solid border-coralRed' : ''
             )}
             key={v}
           >

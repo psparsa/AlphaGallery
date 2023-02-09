@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
-import { Search } from '@/components/common/search/search';
+import { Search } from '@/components/common/Search/search';
 import { ScrollButton } from '@/components/common/scroll-button/scroll-button';
 import { Pagination } from '@/components/common/pagination';
 
@@ -53,6 +53,7 @@ export default function Home() {
           className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-gradient-to-b from-chineseBlackVoid to-chineseBlack"
         ></div>
+        <Pagination numberOfPages={10} defaultPage={11} />
       </main>
     </>
   );
