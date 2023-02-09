@@ -28,7 +28,7 @@ export const Card = ({ title, description, categories }: Properties) => {
             </div>
           </div>
           <div className="py-3">
-            <Button>Download</Button>
+            <Button fluid>Download</Button>
           </div>
         </div>
       </div>
