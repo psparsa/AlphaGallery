@@ -50,6 +50,7 @@ export const Pagination = ({
 
   const visiblePages = getVisiblePagesIndexes();
 
+  //FIXME this should go the button component as a variant of `outline` perhaps
   const CHANGE_PAGE_BUTTONS_CLASSES = `mx-5 flex w-24 cursor-pointer select-none justify-center 
     rounded-3xl border border-solid border-coralRed py-2 text-snow`;
 
