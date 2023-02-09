@@ -24,11 +24,21 @@ export const Pagination = ({
     const expectedStart = currentPage - 1 - sidePageCount;
 
     const start =
-      expectedEnd > pagesCount ? visiblePagesCount : Math.max(expectedStart, 0);
+      expectedEnd > pagesCount
+        ? pagesCount - visiblePagesCount
+        : Math.max(expectedStart, 0);
 
     const end =
       expectedStart < 0 ? visiblePagesCount : Math.min(expectedEnd, pagesCount);
 
+    console.log({
+      sidePageCount,
+      expectedEnd,
+      expectedStart,
+      pagesCount,
+      start,
+      end,
+    });
     return pages.slice(start, end);
   };
 
