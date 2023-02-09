@@ -1,8 +1,17 @@
-import { Search, ScrollButton, Layout } from '@/components';
+import { Search, ScrollButton } from '@/components';
+import { Roboto } from '@next/font/google';
+import { twMerge } from 'tailwind-merge';
+
+const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <Layout>
+    <main
+      className={twMerge(
+        roboto.className,
+        'flex min-h-screen w-screen flex-col bg-chineseBlack font-light text-snow'
+      )}
+    >
       <div
         className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-chineseBlackVoid"
@@ -27,6 +36,6 @@ export default function Home() {
         className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-gradient-to-b from-chineseBlackVoid to-chineseBlack"
       ></div>
-    </Layout>
+    </main>
   );
 }

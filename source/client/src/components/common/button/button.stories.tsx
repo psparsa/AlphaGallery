@@ -10,9 +10,7 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (arguments_) => (
-  <div className="w-52">
-    <Button {...arguments_} />
-  </div>
+  <Button {...arguments_} />
 );
 
 export const Default = Template.bind({});
