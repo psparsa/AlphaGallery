@@ -53,7 +53,7 @@ export default function Home() {
           className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-gradient-to-b from-chineseBlackVoid to-chineseBlack"
         ></div>
-        <Pagination numberOfPages={10} defaultPage={11} />
+        <Pagination pagesCount={10} defaultPage={3} />
       </main>
     </>
   );
