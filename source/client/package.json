@@ -6,14 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "eslint",
-      "prettier --write --ignore-unknown"
+      "eslint --fix"
     ]
   },
   "resolutions": {
@@ -44,12 +43,13 @@
     "babel-loader": "^8.3.0",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
-    "eslint-config-prettier": "8.6.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-typescript-sort-keys": "2.1.0",
     "eslint-plugin-unicorn": "45.0.2",
     "lint-staged": "12.1.4",
     "postcss": "8.4.21",
-    "prettier": "2.8.3",
+    "prettier": "^2.8.3",
     "prettier-plugin-tailwindcss": "0.2.2",
     "storybook": "^6.5.16",
     "storybook-addon-next": "1.7.1",

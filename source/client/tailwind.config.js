@@ -15,6 +15,17 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px)
     },
+    extend: {
+      width: {
+        97.5: '24.375rem',
+      },
+      height: {
+        87.5: '21.275rem',
+      },
+      borderRadius: {
+        '4xl': '1.25rem',
+      },
+    },
     colors: {
       snow: '#FFFAFA',
       coralRed: '#FF4343',
