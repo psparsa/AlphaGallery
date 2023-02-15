@@ -1,3 +1,4 @@
+import React from 'react';
 import { Search, ScrollButton } from '@/components';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
