@@ -2,18 +2,14 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Properties {
-  defaultPage?: number;
   onChange?: (page: number) => void;
+  page?: number;
   pagesCount: number;
 }
 
-export const Pagination = ({
-  defaultPage,
-  pagesCount,
-  onChange,
-}: Properties) => {
+export const Pagination = ({ page, pagesCount, onChange }: Properties) => {
   const [currentPage, setCurrentPage] = React.useState(
-    defaultPage ? Math.min(defaultPage, pagesCount) : 1
+    page ? Math.min(page, pagesCount) : 1
   );
 
   const pages = Array.from({ length: pagesCount }, (_, index) => index + 1);
@@ -65,6 +61,10 @@ export const Pagination = ({
     if (onChange) onChange(page);
     setCurrentPage(page);
   };
+
+  React.useEffect(() => {
+    if (page) setCurrentPage(page);
+  }, [page]);
 
   const CHANGE_PAGE_BUTTONS_CLASSES = `mx-5 flex w-24 cursor-pointer select-none justify-center 
     rounded-3xl border border-solid border-coralRed py-2 text-snow`;

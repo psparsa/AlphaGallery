@@ -107,11 +107,14 @@ export const getPosts = async ({
 export const useGetPosts = ({
   pageSize,
   page,
+  initialData,
 }: {
+  initialData?: PostsResponse;
   page: number;
   pageSize: number;
 }) =>
   useQuery({
     queryKey: ['posts', page],
     queryFn: () => getPosts({ pageSize, page }),
+    initialData,
   });
