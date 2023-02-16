@@ -3,11 +3,12 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Card } from './card';
 
 export default {
+  title: 'Card',
   component: Card,
 } as ComponentMeta<typeof Card>;
 
-const Template: ComponentStory<typeof Card> = (arguments_) => (
-  <Card {...arguments_} />
+const Template: ComponentStory<typeof Card> = (properties) => (
+  <Card {...properties} />
 );
 
 export const Default = Template.bind({});

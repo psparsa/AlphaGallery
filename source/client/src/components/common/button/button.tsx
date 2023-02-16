@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 interface Properties {
-  children: React.ReactNode;
+  children: string;
   fluid?: boolean;
   variant?: 'dark' | 'red';
 }

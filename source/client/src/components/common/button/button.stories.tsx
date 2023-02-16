@@ -3,14 +3,15 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from './button';
 
 export default {
+  title: 'Button',
   component: Button,
   args: {
-    children: 'Download',
+    children: 'Click on Me',
   },
 } as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = (arguments_) => (
-  <Button {...arguments_} />
+const Template: ComponentStory<typeof Button> = (properties) => (
+  <Button {...properties}>{properties.children}</Button>
 );
 
 export const Default = Template.bind({});
