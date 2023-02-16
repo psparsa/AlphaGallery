@@ -1,12 +1,56 @@
 import React from 'react';
-import { Search, ScrollButton } from '@/components';
+import { Search, ScrollButton, Card } from '@/components';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
 import Head from 'next/head';
+import { getPosts, PostsResponse, useGetPosts } from '@/api';
+import { GetServerSideProps } from 'next';
+import { Pagination } from '@/components/common/pagination';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
-export default function Home() {
+interface HomePageProperties {
+  initialPosts: PostsResponse;
+}
+
+export const getServerSideProps: GetServerSideProps<
+  HomePageProperties
+> = async () => {
+  const posts = await getPosts({ page: 1, pageSize: 3 });
+
+  return {
+    props: {
+      initialPosts: posts,
+    },
+  };
+};
+
+export default function HomePage({ initialPosts }: HomePageProperties) {
+  const [page, setPage] = React.useState(1);
+  const { data: posts } = useGetPosts({
+    page,
+    pageSize: 3,
+    initialData: initialPosts,
+  });
+
+  const getCards = () => {
+    if (posts)
+      return posts.data.map((post) => (
+        <Card
+          categories={post.attributes.categories.data.map(
+            (x) => x.attributes.name
+          )}
+          description={post.attributes.description}
+          title={post.attributes.title}
+          key={post.id}
+          containerClassName="mx-4 my-8"
+        />
+      ));
+
+    // TODO: return an error indicator
+    return 'Oops!';
+  };
+
   return (
     <>
       <Head>
@@ -41,7 +85,20 @@ export default function Home() {
         <div
           className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-gradient-to-b from-chineseBlackVoid to-chineseBlack"
-        ></div>
+        >
+          <div className="flex min-h-full w-full flex-wrap justify-center">
+            {getCards()}
+          </div>
+          {posts && (
+            <div className="mb-4 mt-2">
+              <Pagination
+                page={page}
+                pagesCount={posts.meta.pagination.pageCount}
+                onChange={setPage}
+              />
+            </div>
+          )}
+        </div>
       </main>
     </>
   );
