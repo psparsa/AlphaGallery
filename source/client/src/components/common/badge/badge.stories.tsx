@@ -14,3 +14,6 @@ export const Default = Template.bind({});
 Default.args = {
   label: 'animal',
 };
+Default.parameters = {
+  backgrounds: { default: 'dark' },
+};
