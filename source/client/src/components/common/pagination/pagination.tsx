@@ -1,66 +1,71 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Properties {
   defaultPage?: number;
   onChange?: (page: number) => void;
   pagesCount: number;
-  visiblePagesCount?: number;
 }
 
 export const Pagination = ({
   defaultPage,
   pagesCount,
   onChange,
-  visiblePagesCount = 5,
 }: Properties) => {
-  const [currentPage, setCurrentPage] = useState(defaultPage ?? 1);
+  const [currentPage, setCurrentPage] = React.useState(
+    defaultPage ? Math.min(defaultPage, pagesCount) : 1
+  );
 
-  const getVisiblePagesIndexes = () => {
-    const pages = Array.from({ length: pagesCount }, (_, index) => index + 1);
-    const sidePageCount = Math.floor((visiblePagesCount - 1) / 2);
+  const pages = Array.from({ length: pagesCount }, (_, index) => index + 1);
+  const getVisiblePages = () => {
+    const items = [
+      ...pages.slice(Math.max(currentPage - 3, 0), currentPage - 1),
+      currentPage,
+      ...pages.slice(currentPage, currentPage + 2),
+    ];
 
-    const expectedEnd = currentPage + sidePageCount;
-    const expectedStart = currentPage - 1 - sidePageCount;
+    if (currentPage <= 2)
+      return [
+        ...items,
+        ...pages.slice(
+          currentPage + 2,
+          currentPage + (currentPage === 1 ? 4 : 3)
+        ),
+      ];
 
-    const start =
-      expectedEnd > pagesCount
-        ? pagesCount - visiblePagesCount
-        : Math.max(expectedStart, 0);
+    if (currentPage >= pagesCount - 1)
+      return [
+        ...pages.slice(
+          currentPage - (currentPage === pagesCount ? 5 : 4),
+          currentPage - 3
+        ),
+        ...items,
+      ];
 
-    const end =
-      expectedStart < 0 ? visiblePagesCount : Math.min(expectedEnd, pagesCount);
-
-    console.log({
-      sidePageCount,
-      expectedEnd,
-      expectedStart,
-      pagesCount,
-      start,
-      end,
-    });
-    return pages.slice(start, end);
+    return items;
   };
 
   const goNextPage = () => {
-    if (currentPage > 1) setCurrentPage((p) => p + 1);
+    if (currentPage < pagesCount)
+      setCurrentPage((p) => {
+        if (onChange) onChange(p + 1);
+        return p + 1;
+      });
   };
 
   const goPreviousPage = () => {
-    if (currentPage < pagesCount) setCurrentPage((p) => p - 1);
+    if (currentPage > 1)
+      setCurrentPage((p) => {
+        if (onChange) onChange(p - 1);
+        return p - 1;
+      });
   };
 
-  useEffect(() => {
-    setCurrentPage(defaultPage ?? 1);
-  }, [defaultPage]);
+  const handleChangePage = (page: number) => {
+    if (onChange) onChange(page);
+    setCurrentPage(page);
+  };
 
-  useEffect(() => {
-    onChange?.(currentPage);
-  }, [currentPage, onChange]);
-
-  const visiblePages = getVisiblePagesIndexes();
-
-  //FIXME this should go the button component as a variant of `outline` perhaps
   const CHANGE_PAGE_BUTTONS_CLASSES = `mx-5 flex w-24 cursor-pointer select-none justify-center 
     rounded-3xl border border-solid border-coralRed py-2 text-snow`;
 
@@ -73,12 +78,14 @@ export const Pagination = ({
         Previous
       </div>
       <div className="flex">
-        {visiblePages.map((v) => (
+        {getVisiblePages().map((v) => (
           <div
-            onClick={() => setCurrentPage(v)}
+            onClick={() => handleChangePage(v)}
             className={twMerge(
               `mx-1 flex h-10 w-10 cursor-pointer select-none items-center justify-center rounded-lg text-snow`,
-              currentPage === v ? 'border border-solid border-coralRed' : ''
+              currentPage === v
+                ? 'border border-solid border-coralRed'
+                : undefined
             )}
             key={v}
           >
