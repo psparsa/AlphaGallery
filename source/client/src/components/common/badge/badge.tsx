@@ -1,7 +1,7 @@
 interface Properties {
-  children: React.ReactNode;
+  label: string;
 }
 
-export const Badge = ({ children }: Properties) => {
-  return <span className="rounded-xl bg-chineseBlack px-3">{children}</span>;
+export const Badge = ({ label }: Properties) => {
+  return <span className="rounded-xl bg-chineseBlack px-3">{label}</span>;
 };

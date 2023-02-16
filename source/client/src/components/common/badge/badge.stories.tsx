@@ -3,13 +3,14 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Badge } from './badge';
 
 export default {
+  title: 'Badge',
   component: Badge,
 } as ComponentMeta<typeof Badge>;
 
-const Template: ComponentStory<typeof Badge> = (arguments_) => (
-  <Badge {...arguments_} />
+const Template: ComponentStory<typeof Badge> = (properties) => (
+  <Badge {...properties} />
 );
 export const Default = Template.bind({});
 Default.args = {
-  children: 'animal',
+  label: 'animal',
 };
