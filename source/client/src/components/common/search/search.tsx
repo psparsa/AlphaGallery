@@ -6,7 +6,7 @@ import searchIcon from '@/assets/search-icon.png';
 interface SearchProperties {
   containerClassName?: string;
   onChange?: (value: string) => void;
-  onSearch?: () => void;
+  onSearch?: (value: string) => void;
 }
 
 export const Search = ({
@@ -24,7 +24,7 @@ export const Search = ({
   };
 
   const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && onSearch) onSearch();
+    if (event.key === 'Enter' && onSearch) onSearch(value);
   };
 
   return (
@@ -45,7 +45,9 @@ export const Search = ({
       />
       <button
         className="flex w-12 items-center justify-center bg-taupeGray"
-        onClick={onSearch}
+        onClick={() => {
+          if (onSearch) onSearch(value);
+        }}
         disabled={value.length === 0}
       >
         <Image src={searchIcon} alt="search" className="w-7" />
