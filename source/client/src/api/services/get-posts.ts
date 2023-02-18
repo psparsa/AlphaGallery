@@ -87,9 +87,11 @@ export type PostsResponse = z.infer<typeof PostsSchema>;
 export const getPosts = async ({
   pageSize,
   page,
+  query,
 }: {
   page: number;
   pageSize: number;
+  query?: string;
 }) => {
   const { data } = await Client<PostsResponse>({
     method: 'GET',
@@ -98,6 +100,7 @@ export const getPosts = async ({
       populate: '*',
       'pagination[pageSize]': pageSize,
       'pagination[page]': page,
+      'filters[title][$contains]': query,
     },
   });
 
@@ -107,14 +110,16 @@ export const getPosts = async ({
 export const useGetPosts = ({
   pageSize,
   page,
+  query,
   initialData,
 }: {
   initialData?: PostsResponse;
   page: number;
   pageSize: number;
+  query?: string;
 }) =>
   useQuery({
-    queryKey: ['posts', page],
-    queryFn: () => getPosts({ pageSize, page }),
+    queryKey: ['posts', page, query],
+    queryFn: () => getPosts({ pageSize, page, query }),
     initialData,
   });

@@ -9,6 +9,10 @@ import { Pagination } from '@/components/common/pagination';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
+const scrollToBottom = () => {
+  window.scrollTo({ behavior: 'smooth', top: document.body.scrollHeight });
+};
+
 interface HomePageProperties {
   initialPosts: PostsResponse;
 }
@@ -27,10 +31,12 @@ export const getServerSideProps: GetServerSideProps<
 
 export default function HomePage({ initialPosts }: HomePageProperties) {
   const [page, setPage] = React.useState(1);
+  const [query, setQuery] = React.useState('');
   const { data: posts } = useGetPosts({
     page,
     pageSize: 3,
     initialData: initialPosts,
+    query,
   });
 
   const getCards = () => {
@@ -49,6 +55,11 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
 
     // TODO: return an error indicator
     return 'Oops!';
+  };
+
+  const handleSearch = (q: string) => {
+    setQuery(q);
+    scrollToBottom();
   };
 
   return (
@@ -76,10 +87,10 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
             <div className="mt-4 text-begonia">
               Explore and Upload Images just by a few clicks...
             </div>
-            <Search containerClassName="mt-16" />
+            <Search containerClassName="mt-16" onSearch={handleSearch} />
           </div>
 
-          <ScrollButton containerClassName="mb-4" />
+          <ScrollButton containerClassName="mb-4" onClick={scrollToBottom} />
         </div>
 
         <div
