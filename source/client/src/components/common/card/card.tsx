@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import CatImage from '@/assets/cat.jpeg';
 import { Badge } from '../badge';
 import { Button } from '../button';
 import { twMerge } from 'tailwind-merge';
@@ -8,6 +7,7 @@ interface Properties {
   categories: string[];
   containerClassName?: string;
   description: string;
+  imageSrc: string;
   title: string;
 }
 
@@ -16,6 +16,7 @@ export const Card = ({
   title,
   description,
   categories,
+  imageSrc,
 }: Properties) => {
   return (
     <div
@@ -24,7 +25,13 @@ export const Card = ({
         'flex w-97.5 flex-col overflow-hidden rounded-4xl bg-gunmetal'
       )}
     >
-      <Image alt="cat" className="h-87.5 w-full object-cover" src={CatImage} />
+      <Image
+        alt="cat"
+        className="h-87.5 w-full object-cover"
+        src={imageSrc}
+        width={1000}
+        height={1000}
+      />
       <div className="flex flex-col gap-y-5 px-5 py-2">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-3xl">{title}</h1>
