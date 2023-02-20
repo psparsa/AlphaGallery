@@ -1,14 +1,11 @@
 import { twMerge } from 'tailwind-merge';
 
-interface ScrollButtonProperties {
+interface Properties {
   containerClassName?: string;
   onClick?: () => void;
 }
 
-export const ScrollButton = ({
-  containerClassName,
-  onClick,
-}: ScrollButtonProperties) => {
+export const ScrollButton = ({ containerClassName, onClick }: Properties) => {
   return (
     <div
       className={twMerge(

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import searchIcon from '@/assets/search-icon.png';
 
-interface SearchProperties {
+interface Properties {
   containerClassName?: string;
   onChange?: (value: string) => void;
   onSearch?: (value: string) => void;
@@ -13,7 +13,7 @@ export const Search = ({
   containerClassName,
   onChange,
   onSearch,
-}: SearchProperties) => {
+}: Properties) => {
   const [value, setValue] = React.useState('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
