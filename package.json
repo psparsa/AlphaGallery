@@ -2,11 +2,17 @@
   "private": true,
   "name": "alpha-gallery",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "install:server": "cd source/server && npm install",
+    "install:client": "cd source/client && npm install",
+    "postinstall": "run-p install:*"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.4",
     "@commitlint/config-conventional": "17.4.4",
     "husky": "8.0.3"
+  },
+  "dependencies": {
+    "npm-run-all": "4.1.5"
   }
 }
