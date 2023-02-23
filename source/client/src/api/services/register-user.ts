@@ -1,29 +1,21 @@
 import { Client } from '../client';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
+import { UserInfoSchema } from '@/api';
 
-export const UserInfoSchema = z.object({
+export const RegisterUserSchema = z.object({
   jwt: z.string(),
-  user: z.object({
-    id: z.number(),
-    username: z.string(),
-    email: z.string(),
-    provider: z.string(),
-    confirmed: z.boolean(),
-    blocked: z.boolean(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  user: UserInfoSchema,
 });
 
-export type UserInfoResponse = z.infer<typeof UserInfoSchema>;
+export type RegisterUserResponse = z.infer<typeof RegisterUserSchema>;
 
 export const registerUser = async ({
   username,
   email,
   password,
 }: Record<'username' | 'email' | 'password', string>) => {
-  const { data } = await Client<UserInfoResponse>({
+  const { data } = await Client<RegisterUserResponse>({
     method: 'POST',
     url: '/auth/local/register',
     data: {
@@ -33,7 +25,7 @@ export const registerUser = async ({
     },
   });
 
-  return UserInfoSchema.parse(data);
+  return RegisterUserSchema.parse(data);
 };
 
 export const useRegisterUser = () =>
