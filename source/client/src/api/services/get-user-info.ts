@@ -18,6 +18,7 @@ export type UserInfoResponse = z.infer<typeof UserInfoSchema>;
 export const getUserInfo = async ({ jwt }: { jwt: string }) => {
   const { data } = await Client<UserInfoResponse>({
     method: 'GET',
+    url: '/users/me',
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
@@ -27,14 +28,20 @@ export const getUserInfo = async ({ jwt }: { jwt: string }) => {
 };
 
 export const useUserInfo = ({
+  initialData,
   jwt,
-  enabled = true,
+  onError,
 }: {
-  enabled: boolean;
-  jwt: string;
+  initialData?: UserInfoResponse;
+  jwt?: string;
+  onError: (error: unknown) => void;
 }) =>
   useQuery({
     queryKey: ['usr-info'],
-    queryFn: () => getUserInfo({ jwt }),
-    enabled,
+    queryFn: () => getUserInfo({ jwt: jwt ?? '' }),
+    enabled: !!jwt,
+    // if you just write initialData: initialData, the type of isLoading
+    // always will be false, which is not true as initialData is optional
+    ...(initialData ? { initialData } : undefined),
+    onError,
   });
