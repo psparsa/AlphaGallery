@@ -16,7 +16,7 @@ export const useAuth = ({ initialUserData }: UseAuthArguments) => {
   const userId = data?.id;
 
   const userDataIsLoading = isLoading && !!token;
-  const isAuthenticated = !!userId && !!token;
+  const isAuthenticated = !!userId;
 
   React.useEffect(() => {
     const updateToken = () => {
