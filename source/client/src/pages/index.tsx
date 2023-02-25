@@ -3,9 +3,17 @@ import { Search, ScrollButton, Card } from '@/components';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
 import Head from 'next/head';
-import { getPosts, PostsResponse, useGetPosts } from '@/api';
+import {
+  getPosts,
+  getUserInfo,
+  PostsResponse,
+  useGetPosts,
+  UserInfoResponse,
+} from '@/api';
 import { GetServerSideProps } from 'next';
 import { Pagination } from '@/components/common/pagination';
+import { useAuth } from '@/utils/use-auth';
+import { Button } from '@/components/common/button';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -15,12 +23,29 @@ const scrollToBottom = () => {
 
 interface HomePageProperties {
   initialPosts: PostsResponse;
+  initialUserData?: UserInfoResponse;
 }
 
 export const getServerSideProps: GetServerSideProps<
   HomePageProperties
-> = async () => {
+> = async (context) => {
+  const token = context.req.cookies.token;
   const posts = await getPosts({ page: 1, pageSize: 3 });
+
+  try {
+    if (token) {
+      const userData = await getUserInfo({ jwt: token });
+
+      return {
+        props: {
+          initialPosts: posts,
+          initialUserData: userData,
+        },
+      };
+    }
+  } catch {
+    /* empty */
+  }
 
   return {
     props: {
@@ -29,7 +54,16 @@ export const getServerSideProps: GetServerSideProps<
   };
 };
 
-export default function HomePage({ initialPosts }: HomePageProperties) {
+export default function HomePage({
+  initialPosts,
+  initialUserData,
+}: HomePageProperties) {
+  const { isAuthenticated, userDataIsLoading } = useAuth({ initialUserData });
+
+  React.useEffect(() => {
+    console.log({ isAuthenticated, userDataIsLoading });
+  }, [isAuthenticated, userDataIsLoading]);
+
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState('');
   const { data: posts } = useGetPosts({
@@ -81,6 +115,18 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
           className="flex min-h-screen w-screen flex-col items-center
         justify-center bg-chineseBlackVoid"
         >
+          <header className="fixed top-0 left-0 flex w-screen px-4 py-3">
+            {isAuthenticated ? (
+              <>
+                <Button variant="dark">Login</Button>
+                <Button variant="dark" containerClassName="ml-2">
+                  Upload
+                </Button>
+              </>
+            ) : (
+              <Button variant="dark">Logout</Button>
+            )}
+          </header>
           <div
             className="flex w-full flex-1 flex-col items-center
             justify-center"
