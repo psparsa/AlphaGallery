@@ -32,24 +32,19 @@ export const getServerSideProps: GetServerSideProps<
   const token = context.req.cookies.token;
   const posts = await getPosts({ page: 1, pageSize: 3 });
 
-  try {
-    if (token) {
-      const userData = await getUserInfo({ jwt: token });
+  if (!token)
+    return {
+      props: {
+        initialPosts: posts,
+      },
+    };
 
-      return {
-        props: {
-          initialPosts: posts,
-          initialUserData: userData,
-        },
-      };
-    }
-  } catch {
-    /* empty */
-  }
+  const userData = await getUserInfo({ jwt: token }).catch();
 
   return {
     props: {
       initialPosts: posts,
+      initialUserData: userData,
     },
   };
 };
