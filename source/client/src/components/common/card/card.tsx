@@ -46,9 +46,11 @@ export const Card = ({
               ))}
             </div>
           </div>
-          <div className="py-3">
-            <Button fluid>Download</Button>
-          </div>
+          <a href={imageSrc}>
+            <div className="py-3">
+              <Button fluid={true}>Download</Button>
+            </div>
+          </a>
         </div>
       </div>
     </div>
