@@ -113,13 +113,13 @@ export default function HomePage({
           <header className="fixed top-0 left-0 flex w-screen px-4 py-3">
             {isAuthenticated ? (
               <>
-                <Button variant="dark">Login</Button>
+                <Button variant="dark">Logout</Button>
                 <Button variant="dark" containerClassName="ml-2">
                   Upload
                 </Button>
               </>
             ) : (
-              <Button variant="dark">Logout</Button>
+              <Button variant="dark">Login</Button>
             )}
           </header>
           <div
