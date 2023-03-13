@@ -14,6 +14,7 @@ import { GetServerSideProps } from 'next';
 import { Pagination } from '@/components/common/pagination';
 import { useAuth } from '@/utils/use-auth';
 import { Button } from '@/components/common/button';
+import Link from 'next/link';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -119,7 +120,9 @@ export default function HomePage({
                 </Button>
               </>
             ) : (
-              <Button variant="dark">Login</Button>
+              <Link href="/login">
+                <Button variant="dark">Login</Button>
+              </Link>
             )}
           </header>
           <div
