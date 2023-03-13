@@ -19,12 +19,17 @@
     "webpack": "^5"
   },
   "dependencies": {
+    "@hookform/resolvers": "2.9.11",
     "@tanstack/react-query": "4.24.6",
     "axios": "1.3.3",
     "js-cookie": "3.0.1",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "7.43.5",
+    "react-icons": "4.8.0",
+    "react-toastify": "9.1.1",
+    "use-debounce": "9.0.3",
     "zod": "3.20.6"
   },
   "devDependencies": {
