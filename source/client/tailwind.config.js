@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
-  extend: {},
   theme: {
     screens: {
       sm: '500px',
@@ -18,6 +17,7 @@ module.exports = {
     extend: {
       width: {
         97.5: '24.375rem',
+        100: '30rem',
       },
       height: {
         87.5: '21.275rem',
@@ -25,15 +25,15 @@ module.exports = {
       borderRadius: {
         '4xl': '1.25rem',
       },
-    },
-    colors: {
-      snow: '#FFFAFA',
-      coralRed: '#FF4343',
-      begonia: '#FF7171',
-      taupeGray: '#878787',
-      chineseBlack: '#14161A',
-      gunmetal: '#2C313A',
-      chineseBlackVoid: '#10131C',
+      colors: {
+        snow: '#FFFAFA',
+        coralRed: '#FF4343',
+        begonia: '#FF7171',
+        taupeGray: '#878787',
+        chineseBlack: '#14161A',
+        gunmetal: '#2C313A',
+        chineseBlackVoid: '#10131C',
+      },
     },
   },
   plugins: [],
