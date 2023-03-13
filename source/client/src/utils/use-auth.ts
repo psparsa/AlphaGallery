@@ -1,12 +1,14 @@
 import React from 'react';
 import { UserInfoResponse, useUserInfo } from '@/api';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 export interface UseAuthArguments {
   initialUserData?: UserInfoResponse;
 }
 
 export const useAuth = ({ initialUserData }: UseAuthArguments) => {
+  const router = useRouter();
   const [token, setToken] = React.useState(Cookies.get('token'));
   const { data, isLoading } = useUserInfo({
     jwt: token,
@@ -19,6 +21,12 @@ export const useAuth = ({ initialUserData }: UseAuthArguments) => {
   const isAuthenticated =
     !!userId &&
     (typeof window === 'undefined' ? !!initialUserData?.id : !!token);
+
+  const loginUser = ({ jwt }: { jwt: string }) => {
+    Cookies.set('token', jwt);
+    setToken(jwt);
+    void router.replace('/');
+  };
 
   React.useEffect(() => {
     const updateToken = () => {
@@ -33,5 +41,6 @@ export const useAuth = ({ initialUserData }: UseAuthArguments) => {
   return {
     isAuthenticated,
     userDataIsLoading,
+    loginUser,
   };
 };
