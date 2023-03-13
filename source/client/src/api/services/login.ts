@@ -1,6 +1,6 @@
 import { Client } from '../client';
 import { z } from 'zod';
-import { UserInfoSchema } from '@/api';
+import { UserInfoSchema } from './get-user-info';
 import { useMutation } from '@tanstack/react-query';
 
 export const LoginSchema = z.object({
@@ -16,14 +16,14 @@ export const login = async ({
 }: Record<'identifier' | 'password', string>) => {
   const { data } = await Client<LoginResponse>({
     method: 'POST',
-    url: '/api/auth/local',
+    url: '/auth/local',
     data: {
       identifier,
       password,
     },
   });
 
-  return UserInfoSchema.parse(data);
+  return LoginSchema.parse(data);
 };
 
 export const useLogin = () =>
