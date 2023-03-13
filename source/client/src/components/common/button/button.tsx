@@ -4,14 +4,16 @@ import { twMerge } from 'tailwind-merge';
 interface Properties {
   children: string;
   containerClassName?: string;
+  disable?: boolean;
   fluid?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: 'submit' | 'reset' | 'button';
   variant?: 'dark' | 'red';
 }
 
 const colorVariants = {
   red: 'bg-coralRed',
-  dark: 'bg-gunmetal',
+  dark: 'bg-gunmetal text-snow',
 } as const;
 
 export const Button = ({
@@ -19,17 +21,22 @@ export const Button = ({
   containerClassName,
   fluid = false,
   variant = 'red',
+  type,
   onClick,
+  disable,
 }: Properties) => {
   return (
     <button
       className={twMerge(
         colorVariants[variant],
         fluid ? 'w-full' : 'w-28',
-        'rounded-2xl p-2.5 font-medium hover:bg-opacity-80 active:bg-opacity-70',
-        containerClassName
+        'rounded-2xl p-2.5 font-medium',
+        containerClassName,
+        disable ? 'opacity-40' : 'hover:bg-opacity-80 active:bg-opacity-70'
       )}
       onClick={onClick}
+      type={type ?? 'button'}
+      disabled={disable}
     >
       {children}
     </button>
