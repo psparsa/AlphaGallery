@@ -1,9 +1,7 @@
 import '@/styles/globals.css';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-const queryClient = new QueryClient();
+import { ReactQueryProvider } from '@/providers/react-query-provider';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,9 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <QueryClientProvider client={queryClient}>
+      <ReactQueryProvider>
         <Component {...pageProps} />
-      </QueryClientProvider>
+      </ReactQueryProvider>
     </>
   );
 }
