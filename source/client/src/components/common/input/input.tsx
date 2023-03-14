@@ -34,8 +34,8 @@ export const Input = ({
     <div
       className={twMerge(
         containerClassName,
-        'flex h-8 w-60 justify-between overflow-hidden rounded bg-snow',
-        invalid ? 'border-2 border-solid border-coralRed' : ''
+        'flex h-8 w-60 justify-between overflow-hidden rounded border-2 border-solid bg-snow',
+        invalid ? 'border-coralRed' : ''
       )}
     >
       <input
