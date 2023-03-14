@@ -1,37 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import LockImage from '@/assets/lock.jpg';
-import { Input } from '@/components/common/input/input';
-import { Button } from '@/components/common/button';
 import { TbArrowBackUp } from 'react-icons/tb';
 import { useRouter } from 'next/router';
 import { twMerge } from 'tailwind-merge';
 import { Login } from './forms/login';
-
-const Register = () => {
-  return (
-    <form className="flex flex-col items-center">
-      <Input placeHolder="Enter your Email" />
-      <Input placeHolder="Enter your username" containerClassName="mt-3" />
-      <Input
-        placeHolder="Enter your password"
-        secret={true}
-        containerClassName="mt-3"
-      />
-
-      <div className="mt-4 w-36">
-        <Button variant="dark" fluid={true}>
-          Register
-        </Button>
-      </div>
-    </form>
-  );
-};
+import { Register } from './forms/register';
 
 interface LoginFormProperties {
   containerClassName?: string;
 }
-
 export const LoginForm = ({ containerClassName }: LoginFormProperties) => {
   const router = useRouter();
   const isRegisterMode = !!router.query.register;
