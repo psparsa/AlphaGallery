@@ -73,11 +73,14 @@ export const Login = () => {
       <Controller
         name="username"
         control={control}
-        render={({ field: { onChange, onBlur, value, name, ref } }) => (
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid },
+        }) => (
           <Input
             placeHolder="Enter your username"
             inputRef={ref}
-            {...{ onChange, onBlur, value, name }}
+            {...{ onChange, onBlur, value, name, invalid }}
           />
         )}
       />
@@ -90,13 +93,16 @@ export const Login = () => {
       <Controller
         name="password"
         control={control}
-        render={({ field: { onChange, onBlur, value, name, ref } }) => (
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid },
+        }) => (
           <Input
             placeHolder="Enter your password"
             secret={true}
             containerClassName="mt-3"
             inputRef={ref}
-            {...{ onChange, onBlur, value, name }}
+            {...{ onChange, onBlur, value, name, invalid }}
           />
         )}
       />
