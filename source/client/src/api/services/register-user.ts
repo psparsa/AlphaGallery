@@ -1,7 +1,7 @@
 import { Client } from '../client';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
-import { UserInfoSchema } from '@/api';
+import { UserInfoSchema } from './get-user-info';
 
 export const RegisterUserSchema = z.object({
   jwt: z.string(),
