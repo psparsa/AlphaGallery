@@ -75,11 +75,14 @@ export const Register = () => {
       <Controller
         name="email"
         control={control}
-        render={({ field: { onChange, onBlur, value, name, ref } }) => (
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid },
+        }) => (
           <Input
             placeHolder="Enter your Email"
             inputRef={ref}
-            {...{ onChange, onBlur, value, name }}
+            {...{ onChange, onBlur, value, name, invalid }}
           />
         )}
       />
@@ -92,11 +95,14 @@ export const Register = () => {
       <Controller
         name="username"
         control={control}
-        render={({ field: { onChange, onBlur, value, name, ref } }) => (
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid },
+        }) => (
           <Input
             placeHolder="Enter your username"
             inputRef={ref}
-            {...{ onChange, onBlur, value, name }}
+            {...{ onChange, onBlur, value, name, invalid }}
             containerClassName="mt-3"
           />
         )}
@@ -111,11 +117,14 @@ export const Register = () => {
       <Controller
         name="password"
         control={control}
-        render={({ field: { onChange, onBlur, value, name, ref } }) => (
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid },
+        }) => (
           <Input
             placeHolder="Enter your password"
             inputRef={ref}
-            {...{ onChange, onBlur, value, name }}
+            {...{ onChange, onBlur, value, name, invalid }}
             containerClassName="mt-3"
             secret={true}
           />

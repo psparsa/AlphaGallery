@@ -5,6 +5,7 @@ import { twMerge } from 'tailwind-merge';
 interface InputProperties {
   containerClassName?: string;
   inputRef?: LegacyRef<HTMLInputElement>;
+  invalid?: boolean;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   placeHolder?: string;
@@ -20,6 +21,7 @@ export const Input = ({
   onChange,
   value,
   inputRef,
+  invalid,
 }: InputProperties) => {
   const [isVisible, setVisibility] = React.useState(false);
 
@@ -32,7 +34,8 @@ export const Input = ({
     <div
       className={twMerge(
         containerClassName,
-        'flex h-8 w-60 justify-between overflow-hidden rounded border-2 border-solid border-coralRed bg-snow'
+        'flex h-8 w-60 justify-between overflow-hidden rounded bg-snow',
+        invalid ? 'border-2 border-solid border-coralRed' : ''
       )}
     >
       <input
