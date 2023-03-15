@@ -150,7 +150,7 @@ export default function HomePage({
           <div className="flex min-h-full w-full flex-wrap justify-center">
             {getCards()}
           </div>
-          {posts && (
+          {posts && posts.meta.pagination.pageCount > 1 && (
             <div className="mb-4 mt-2">
               <Pagination
                 page={page}
