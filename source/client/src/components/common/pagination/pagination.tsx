@@ -15,7 +15,10 @@ export const Pagination = ({ page, pagesCount, onChange }: Properties) => {
   const pages = Array.from({ length: pagesCount }, (_, index) => index + 1);
   const getVisiblePages = () => {
     const items = [
-      ...pages.slice(Math.max(currentPage - 3, 0), currentPage - 1),
+      ...pages.slice(
+        Math.max(currentPage - (pagesCount === 4 ? 4 : 3), 0),
+        currentPage - 1
+      ),
       currentPage,
       ...pages.slice(currentPage, currentPage + 2),
     ];

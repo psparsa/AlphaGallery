@@ -16,5 +16,5 @@ Default.parameters = {
 };
 Default.args = {
   pagesCount: 15,
-  defaultPage: 5,
+  page: 1,
 };
