@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
-import { Input } from '@/components/common/input/input';
-import { Button } from '@/components/common/button';
+import { Input } from '@/components/common';
+import { Button } from '@/components/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { login as loginAccount } from '@/api';

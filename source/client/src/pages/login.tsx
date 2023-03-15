@@ -1,5 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
-import { LoginForm } from '@/components/common/login-form/login-form';
+import { LoginForm } from '@/components/common';
 import { Roboto } from '@next/font/google';
 import Head from 'next/head';
 import React from 'react';

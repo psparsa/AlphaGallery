@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ScrollButton, Card } from '@/components';
+import { Search, ScrollButton, Card } from '@/components/common';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
 import Head from 'next/head';
@@ -11,9 +11,9 @@ import {
   UserInfoResponse,
 } from '@/api';
 import { GetServerSideProps } from 'next';
-import { Pagination } from '@/components/common/pagination';
+import { Pagination } from '@/components/common';
 import { useAuth } from '@/utils/use-auth';
-import { Button } from '@/components/common/button';
+import { Button } from '@/components/common';
 import Link from 'next/link';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
