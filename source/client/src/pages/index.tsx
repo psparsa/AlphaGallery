@@ -115,9 +115,11 @@ export default function HomePage({
             {isAuthenticated ? (
               <>
                 <Button variant="dark">Logout</Button>
-                <Button variant="dark" containerClassName="ml-2">
-                  Upload
-                </Button>
+                <Link href="/upload">
+                  <Button variant="dark" containerClassName="ml-2">
+                    Upload
+                  </Button>
+                </Link>
               </>
             ) : (
               <Link href="/login">
