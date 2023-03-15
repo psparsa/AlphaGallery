@@ -40,12 +40,12 @@ export const getServerSideProps: GetServerSideProps<
       },
     };
 
-  const userData = await getUserInfo({ jwt: token }).catch();
+  const userData = await getUserInfo({ jwt: token }).catch(console.error);
 
   return {
     props: {
       initialPosts: posts,
-      initialUserData: userData,
+      ...(userData ? { initialUserData: userData } : undefined),
     },
   };
 };
