@@ -13,7 +13,7 @@ interface Properties {
 
 const colorVariants = {
   red: 'bg-coralRed',
-  dark: 'bg-gunmetal text-snow',
+  dark: 'bg-gunmetal',
 } as const;
 
 export const Button = ({
@@ -29,8 +29,8 @@ export const Button = ({
     <button
       className={twMerge(
         colorVariants[variant],
-        fluid ? 'w-full' : 'w-28',
-        'rounded-2xl p-2.5 font-medium',
+        fluid ? 'w-full' : 'w-32',
+        'rounded-2xl p-2.5 font-medium text-snow',
         containerClassName,
         disable ? 'opacity-40' : 'hover:bg-opacity-80 active:bg-opacity-70'
       )}
