@@ -15,6 +15,7 @@ import { Pagination } from '@/components/common';
 import { useAuth } from '@/utils/use-auth';
 import { Button } from '@/components/common';
 import Link from 'next/link';
+import { NoPostCard } from '@/components/common';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -73,7 +74,7 @@ export default function HomePage({
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const API_ADDRESS = `${process.env.NEXT_PUBLIC_API_PROTOCOL}://${process.env.NEXT_PUBLIC_API_HOSTNAME}:${process.env.NEXT_PUBLIC_API_PORT}`;
 
-    if (posts)
+    if (posts && posts.data.length > 0)
       return posts.data.map((post) => (
         <Card
           categories={post.attributes.categories.data.map(
@@ -87,8 +88,10 @@ export default function HomePage({
         />
       ));
 
-    // TODO: return an error indicator
-    return 'Oops!';
+    // FIXME: implement the 404 card!
+    if (query.length > 0) return 'ERROR 404';
+
+    return <NoPostCard />;
   };
 
   const handleSearch = (q: string) => {
