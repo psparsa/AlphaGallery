@@ -40,6 +40,8 @@ export const useUserInfo = ({
     queryKey: ['usr-info'],
     queryFn: () => getUserInfo({ jwt: jwt ?? '' }),
     enabled: !!jwt,
+    retry: 3,
+    retryDelay: 500,
     // if you just write initialData: initialData, the type of isLoading
     // always will be false, which is not true as initialData is optional
     ...(initialData ? { initialData } : undefined),
