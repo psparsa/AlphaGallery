@@ -9,3 +9,4 @@ export * from './scroll-button';
 export * from './search';
 export * from './textarea';
 export * from './no-post-card';
+export * from './not-found-card';

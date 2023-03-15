@@ -16,6 +16,7 @@ import { useAuth } from '@/utils/use-auth';
 import { Button } from '@/components/common';
 import Link from 'next/link';
 import { NoPostCard } from '@/components/common';
+import { NotFoundCard } from '@/components/common';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -88,8 +89,7 @@ export default function HomePage({
         />
       ));
 
-    // FIXME: implement the 404 card!
-    if (query.length > 0) return 'ERROR 404';
+    if (query.length > 0) return <NotFoundCard />;
 
     return <NoPostCard />;
   };
