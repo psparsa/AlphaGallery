@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
   const isVisitingLoginPage = request.nextUrl.pathname.startsWith('/login');
 
   if (isProtectedPath && !token)
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
 
   if (isVisitingLoginPage && token)
     return NextResponse.redirect(new URL('/', request.url));
