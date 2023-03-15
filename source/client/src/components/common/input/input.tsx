@@ -41,7 +41,7 @@ export const Input = ({
       <input
         type={getInputType()}
         placeholder={placeHolder}
-        className="h-full flex-1 bg-snow pl-2 outline-none"
+        className="h-full flex-1 bg-snow pl-2 text-gray-900 outline-none"
         onBlur={onBlur}
         onChange={onChange}
         value={value}

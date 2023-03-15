@@ -51,7 +51,7 @@ export const Textarea = ({
       )}
     >
       <textarea
-        className="h-52 w-full resize-none p-2 outline-none"
+        className="h-52 w-full resize-none p-2 text-gray-900 outline-none"
         maxLength={maxLength ?? DEFAULT_MAX_LENGTH}
         ref={inputRef}
         onBlur={onBlur}
