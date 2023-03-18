@@ -3,7 +3,7 @@ import { Badge } from '../badge';
 import { Button } from '../button';
 import { twMerge } from 'tailwind-merge';
 
-interface Properties {
+export interface ButtonProperties {
   categories: string[];
   containerClassName?: string;
   description: string;
@@ -17,7 +17,7 @@ export const Card = ({
   description,
   categories,
   imageSrc,
-}: Properties) => {
+}: ButtonProperties) => {
   return (
     <div
       className={twMerge(
