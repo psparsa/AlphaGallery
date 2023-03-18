@@ -47,12 +47,18 @@ export const Input = ({
         value={value}
         ref={inputRef}
       />
+
       {secret && (
         <div
           className="flex h-full cursor-pointer items-center justify-center px-2"
           onClick={() => setVisibility((p) => !p)}
+          id="toggle-visibility"
         >
-          {isVisible ? <BsEye size={20} /> : <BsEyeSlash size={20} />}
+          {isVisible ? (
+            <BsEye size={20} color="black" />
+          ) : (
+            <BsEyeSlash size={20} color="black" />
+          )}
         </div>
       )}
     </div>
