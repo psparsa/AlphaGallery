@@ -15,6 +15,7 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "linebreak-style": "off"
   }
 }
