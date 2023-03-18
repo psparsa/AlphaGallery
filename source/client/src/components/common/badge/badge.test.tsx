@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { Badge } from './badge';
+import { Badge } from '.';
 
-test('Renders Badge', async () => {
+test('checks badge label', async () => {
   const LABEL = 'CaTiSH3Re!!!';
   render(<Badge label={LABEL} />);
 
