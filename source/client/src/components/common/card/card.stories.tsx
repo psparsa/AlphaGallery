@@ -20,6 +20,7 @@ Default.args = {
   aliqua.`,
   title: 'Golden eye cat at garden',
   categories: ['cats', 'cute', 'animals'],
+  imageSrc: 'https://picsum.photos/500/500',
 };
 
 const SkeletonTemplate: ComponentStory<typeof Card> = (properties) => (
