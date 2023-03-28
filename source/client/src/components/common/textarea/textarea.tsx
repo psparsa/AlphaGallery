@@ -59,7 +59,10 @@ export const Textarea = ({
         value={inputValue}
         placeholder={placeHolder ?? DEFAULT_PLACEHOLDER}
       />
-      <div className="w-full pr-3 pb-2 text-right text-gunmetal">
+      <div
+        className="w-full pr-3 pb-2 text-right text-gunmetal"
+        data-testid="character-counter"
+      >
         {length}/{maxLength ?? DEFAULT_MAX_LENGTH}
       </div>
     </div>
