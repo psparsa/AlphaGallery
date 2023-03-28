@@ -107,7 +107,7 @@ export const Login = () => {
         )}
       />
 
-      <div className="mt-4 w-36">
+      <div className="mt-4 w-36" data-testid="login-button">
         <Button
           variant="dark"
           fluid={true}

@@ -39,7 +39,7 @@ export const Register = () => {
       username: '',
       password: '',
     },
-    mode: 'onBlur',
+    mode: 'onChange',
     resolver: zodResolver(schema),
   });
 
@@ -131,7 +131,7 @@ export const Register = () => {
         )}
       />
 
-      <div className="mt-4 w-36">
+      <div className="mt-4 w-36" data-testid="register-button">
         <Button
           variant="dark"
           fluid={true}
