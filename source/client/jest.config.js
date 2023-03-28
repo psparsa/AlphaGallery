@@ -1,11 +1,12 @@
-module.exports = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
-  testEnvironment: 'jest-environment-jsdom',
+const nextJest = require('next/jest');
+const createJestConfig = nextJest({
+  dir: './',
+});
 
-  // https://stackoverflow.com/a/51174924/3999031
-  moduleDirectories: ['node_modules', 'src'],
-  transform: {
-    '^.+\\.(ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+module.exports = createJestConfig({
+  testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
-};
+});
