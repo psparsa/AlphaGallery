@@ -77,6 +77,7 @@ export const Pagination = ({ page, pagesCount, onChange }: Properties) => {
       <div
         className={twMerge(CHANGE_PAGE_BUTTONS_CLASSES, 'mb-4 sm:mb-0')}
         onClick={goPreviousPage}
+        data-testid="prev-button"
       >
         Previous
       </div>
@@ -90,6 +91,7 @@ export const Pagination = ({ page, pagesCount, onChange }: Properties) => {
                 ? 'border border-solid border-coralRed'
                 : undefined
             )}
+            data-testid={currentPage === v ? 'current-page-item' : undefined}
             key={v}
           >
             {v}
@@ -99,6 +101,7 @@ export const Pagination = ({ page, pagesCount, onChange }: Properties) => {
       <div
         className={twMerge(CHANGE_PAGE_BUTTONS_CLASSES, 'mt-4 sm:mt-0')}
         onClick={goNextPage}
+        data-testid="next-button"
       >
         Next
       </div>
