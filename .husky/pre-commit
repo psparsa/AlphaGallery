@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd ./source/client && npx lint-staged && cd ../..
-
+cd ./source/client
+npx lint-staged
+CI=true npm test
+cd ../..
