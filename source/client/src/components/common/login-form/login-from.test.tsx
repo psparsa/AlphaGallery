@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  screen,
-  act,
-  waitFor,
-} from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { LoginForm } from '.';
 import { ReactQueryProvider } from '@/providers/react-query-provider';
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
@@ -29,13 +23,11 @@ test('LOGIN: tests form validation', async () => {
   const submitBTNContainer = screen.getByTestId('login-button');
   const submitBTN = submitBTNContainer.querySelector('button');
 
-  act(() => {
-    fireEvent.change(inputs.username, { target: { value: 'ABC' } });
-    fireEvent.change(inputs.password, { target: { value: '1234' } });
+  fireEvent.change(inputs.username, { target: { value: 'ABC' } });
+  fireEvent.change(inputs.password, { target: { value: '1234' } });
 
-    fireEvent.change(inputs.username, { target: { value: '' } });
-    fireEvent.change(inputs.password, { target: { value: '' } });
-  });
+  fireEvent.change(inputs.username, { target: { value: '' } });
+  fireEvent.change(inputs.password, { target: { value: '' } });
 
   await waitFor(() => {
     expect(submitBTN).toBeInTheDocument();
@@ -44,10 +36,8 @@ test('LOGIN: tests form validation', async () => {
     expect(container).toHaveTextContent('Username is required');
   });
 
-  act(() => {
-    fireEvent.change(inputs.username, { target: { value: 'ABC' } });
-    fireEvent.change(inputs.password, { target: { value: '1234' } });
-  });
+  fireEvent.change(inputs.username, { target: { value: 'ABC' } });
+  fireEvent.change(inputs.password, { target: { value: '1234' } });
 
   await waitFor(() => {
     expect(submitBTN).toBeInTheDocument();
@@ -60,9 +50,7 @@ test('LOGIN: tests form validation', async () => {
 test('REGISTER: tests form validation', async () => {
   const { container } = render(<LoginForm />, { wrapper: Wrapper });
 
-  act(() => {
-    fireEvent.click(screen.getByText('Register a new account'));
-  });
+  fireEvent.click(screen.getByText('Register a new account'));
 
   const inputs = {
     email: screen.getByPlaceholderText('Enter your Email'),
@@ -73,11 +61,9 @@ test('REGISTER: tests form validation', async () => {
   const registerBTNContainer = screen.getByTestId('register-button');
   const registerBTN = registerBTNContainer.querySelector('button');
 
-  act(() => {
-    fireEvent.change(inputs.email, { target: { value: 'test@gmail.com' } });
-    fireEvent.change(inputs.username, { target: { value: 'ABC' } });
-    fireEvent.change(inputs.password, { target: { value: '123456' } });
-  });
+  fireEvent.change(inputs.email, { target: { value: 'test@gmail.com' } });
+  fireEvent.change(inputs.username, { target: { value: 'ABC' } });
+  fireEvent.change(inputs.password, { target: { value: '123456' } });
 
   await waitFor(() => {
     expect(mockRouter.asPath).toEqual('/login?register=true');
@@ -85,11 +71,9 @@ test('REGISTER: tests form validation', async () => {
     expect(registerBTN).not.toHaveAttribute('disabled', '');
   });
 
-  act(() => {
-    fireEvent.change(inputs.email, { target: { value: '' } });
-    fireEvent.change(inputs.username, { target: { value: '' } });
-    fireEvent.change(inputs.password, { target: { value: '' } });
-  });
+  fireEvent.change(inputs.email, { target: { value: '' } });
+  fireEvent.change(inputs.username, { target: { value: '' } });
+  fireEvent.change(inputs.password, { target: { value: '' } });
 
   await waitFor(() => {
     expect(registerBTN).toHaveAttribute('disabled', '');
@@ -100,21 +84,17 @@ test('REGISTER: tests form validation', async () => {
     );
   });
 
-  act(() => {
-    fireEvent.change(inputs.email, { target: { value: 'invalid-email.com' } });
-  });
+  fireEvent.change(inputs.email, { target: { value: 'invalid-email.com' } });
 
   await waitFor(() => {
     expect(container).toHaveTextContent('Enter a valid email');
   });
 
-  act(() => {
-    fireEvent.change(inputs.email, {
-      target: { value: 'valid.email@gmail.com' },
-    });
-    fireEvent.change(inputs.username, { target: { value: 'admin' } });
-    fireEvent.change(inputs.password, { target: { value: '123456' } });
+  fireEvent.change(inputs.email, {
+    target: { value: 'valid.email@gmail.com' },
   });
+  fireEvent.change(inputs.username, { target: { value: 'admin' } });
+  fireEvent.change(inputs.password, { target: { value: '123456' } });
 
   await waitFor(() => {
     expect(registerBTN).not.toHaveAttribute('disabled', '');

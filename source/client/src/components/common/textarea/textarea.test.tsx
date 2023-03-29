@@ -1,13 +1,7 @@
 import { Textarea } from '.';
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
-test('tests the character counter', async () => {
+test('tests the character counter', () => {
   const MAX_LENGTH = 100;
   const PLACEHOLDER = 'a dummy placeholder';
   render(<Textarea maxLength={MAX_LENGTH} placeHolder={PLACEHOLDER} />);
@@ -19,15 +13,11 @@ test('tests the character counter', async () => {
 
   const INPUT_VALUE = 'ABC 4444 09!@#%#';
 
-  act(() => {
-    fireEvent.change(inputElement, { target: { value: INPUT_VALUE } });
-  });
+  fireEvent.change(inputElement, { target: { value: INPUT_VALUE } });
 
-  await waitFor(() => {
-    expect(characterCounter).toHaveTextContent(
-      `${INPUT_VALUE.length}/${MAX_LENGTH}`
-    );
-  });
+  expect(characterCounter).toHaveTextContent(
+    `${INPUT_VALUE.length}/${MAX_LENGTH}`
+  );
 });
 
 test('tests the existence of placeholder', () => {
