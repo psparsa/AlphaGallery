@@ -15,15 +15,14 @@ export const registerUser = async ({
   email,
   password,
 }: Record<'username' | 'email' | 'password', string>) => {
-  const { data } = await Client<RegisterUserResponse>({
-    method: 'POST',
-    url: '/auth/local/register',
-    data: {
+  const { data } = await Client.post<RegisterUserResponse>(
+    '/auth/local/register',
+    {
       username,
       email,
       password,
-    },
-  });
+    }
+  );
 
   return RegisterUserSchema.parse(data);
 };

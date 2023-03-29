@@ -52,13 +52,10 @@ export const uploadImage = async ({
 }) => {
   formData.set('files', image);
 
-  const { data } = await Client<UploadImageResponse>({
-    method: 'POST',
-    url: '/upload',
+  const { data } = await Client.post<UploadImageResponse>('/upload', formData, {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
-    data: formData,
   });
 
   return UploadImageSchema.parse(data);

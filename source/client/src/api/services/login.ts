@@ -14,13 +14,9 @@ export const login = async ({
   identifier,
   password,
 }: Record<'identifier' | 'password', string>) => {
-  const { data } = await Client<LoginResponse>({
-    method: 'POST',
-    url: '/auth/local',
-    data: {
-      identifier,
-      password,
-    },
+  const { data } = await Client.post<LoginResponse>('/auth/local', {
+    identifier,
+    password,
   });
 
   return LoginSchema.parse(data);

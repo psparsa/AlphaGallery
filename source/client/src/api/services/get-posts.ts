@@ -93,9 +93,7 @@ export const getPosts = async ({
   pageSize: number;
   query?: string;
 }) => {
-  const { data } = await Client<PostsResponse>({
-    method: 'GET',
-    url: '/posts',
+  const { data } = await Client.get<PostsResponse>('/posts', {
     params: {
       populate: '*',
       'pagination[pageSize]': pageSize,

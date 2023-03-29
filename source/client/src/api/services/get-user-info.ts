@@ -16,9 +16,7 @@ export const UserInfoSchema = z.object({
 export type UserInfoResponse = z.infer<typeof UserInfoSchema>;
 
 export const getUserInfo = async ({ jwt }: { jwt: string }) => {
-  const { data } = await Client<UserInfoResponse>({
-    method: 'GET',
-    url: '/users/me',
+  const { data } = await Client.get<UserInfoResponse>('/users/me', {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },

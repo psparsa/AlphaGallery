@@ -33,13 +33,9 @@ export const publishPost = async ({
   image,
 }: PublishPostProperties) => {
   const [{ id: imageId }] = await uploadImage({ jwt, image });
-  const { data } = await Client<PublishPostResponse>({
-    method: 'POST',
-    url: '/posts',
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-    data: {
+  const { data } = await Client.post<PublishPostResponse>(
+    '/posts',
+    {
       data: {
         title,
         description,
@@ -47,7 +43,12 @@ export const publishPost = async ({
         image: imageId,
       },
     },
-  });
+    {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    }
+  );
 
   return PublishPostSchema.parse(data);
 };
