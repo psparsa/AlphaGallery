@@ -1,0 +1,7 @@
+node_modules
+Dockerfile
+.next
+.swc
+coverage
+README.md
+.env
