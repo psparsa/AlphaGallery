@@ -42,7 +42,6 @@ export const UploadImageSchema = z.array(
 
 export type UploadImageResponse = z.infer<typeof UploadImageSchema>;
 
-const formData = new FormData();
 export const uploadImage = async ({
   jwt,
   image,
@@ -50,6 +49,7 @@ export const uploadImage = async ({
   image: File;
   jwt: string;
 }) => {
+  const formData = new FormData();
   formData.set('files', image);
 
   const { data } = await Client.post<UploadImageResponse>('/upload', formData, {
