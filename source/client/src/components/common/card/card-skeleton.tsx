@@ -14,7 +14,7 @@ export const CardSkeleton = ({ containerClassName }: Properties) => {
     <div
       className={twMerge(
         containerClassName,
-        'text-black flex w-97.5 animate-pulse flex-col items-center  overflow-hidden rounded-4xl'
+        'flex w-97.5 animate-pulse flex-col items-center overflow-hidden  rounded-4xl text-black'
       )}
       style={{
         backgroundColor: 'rgba(255, 255, 255, 0.4)',

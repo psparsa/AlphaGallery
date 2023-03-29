@@ -27,8 +27,6 @@ ENV NEXT_PUBLIC_API_HOSTNAME=$API_HOSTNAME
 ARG API_PORT
 ENV NEXT_PUBLIC_API_PORT=$API_PORT
 
-RUN ls -ltrh && echo "List of files"
-
 RUN npm run build
 EXPOSE 3000
 RUN npm start
