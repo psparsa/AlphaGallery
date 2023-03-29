@@ -6,16 +6,6 @@ WORKDIR /var/client
 COPY package.json package-lock.json ./
 RUN npm ci
 
-#COPY public \
-#src \
-#next.config.js \
-#tailwind.config.js \
-#tsconfig.json \
-#postcss.config.js \
-#.eslintrc.json \
-#.eslintignore \
-#./
-
 COPY . .
 
 ARG API_PROTOCOL
