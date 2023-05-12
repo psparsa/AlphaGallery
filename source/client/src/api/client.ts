@@ -1,8 +1,13 @@
 import Axios from 'axios';
 
-// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-const baseURL = `${process.env.NEXT_PUBLIC_API_PROTOCOL}://${process.env.NEXT_PUBLIC_API_HOSTNAME}:${process.env.NEXT_PUBLIC_API_PORT}/api`;
+export const Client = Axios.create();
 
-export const Client = Axios.create({
-  baseURL,
+Client.interceptors.request.use((config) => {
+  const baseURL =
+    typeof window === 'undefined'
+      ? process.env.NEXT_PUBLIC_API_ADDRESS_SERVER_SIDE
+      : process.env.NEXT_PUBLIC_API_ADDRESS_CLIENT_SIDE;
+
+  Reflect.set(config, 'baseURL', baseURL);
+  return config;
 });
