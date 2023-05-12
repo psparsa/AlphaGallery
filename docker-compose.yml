@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./source/client
+      args:
+        - API_PROTOCOL=http
+        - API_HOSTNAME=$WEBSITE_ORIGIN
+        - API_PORT=1337
+        - API_ADDRESS_SERVER_SIDE=http://server:1337/api
+        - API_ADDRESS_CLIENT_SIDE=http://${WEBSITE_ORIGIN}:1337/api
+    ports:
+      - "8080:3000"
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./source/server
+      args:
+        - ADMIN_FIRST_NAME=${ADMIN_FIRST_NAME}
+        - ADMIN_LAST_NAME=${ADMIN_LAST_NAME}
+        - ADMIN_EMAIL=${ADMIN_EMAIL}
+        - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    ports:
+      - "1337:1337"
