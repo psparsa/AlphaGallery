@@ -7,7 +7,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "cs:import": "config-sync import --yes"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.6.0",
