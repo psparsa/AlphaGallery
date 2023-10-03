@@ -1,13 +1,9 @@
 import Axios from 'axios';
+import { apiBaseURL } from './end-points';
 
 export const Client = Axios.create();
 
 Client.interceptors.request.use((config) => {
-  const baseURL =
-    typeof window === 'undefined'
-      ? process.env.NEXT_PUBLIC_API_ADDRESS_SERVER_SIDE
-      : process.env.NEXT_PUBLIC_API_ADDRESS_CLIENT_SIDE;
-
-  Reflect.set(config, 'baseURL', baseURL);
+  Reflect.set(config, 'baseURL', apiBaseURL);
   return config;
 });

@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { z } from 'zod';
 import { uploadImage } from './upload-image';
+import { endPoints } from '../end-points';
 
 export const PublishPostSchema = z.object({
   data: z.object({
@@ -34,7 +35,7 @@ export const publishPost = async ({
 }: PublishPostProperties) => {
   const [{ id: imageId }] = await uploadImage({ jwt, image });
   const { data } = await Client.post<PublishPostResponse>(
-    '/posts',
+    endPoints.publishPost,
     {
       data: {
         title,

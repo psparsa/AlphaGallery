@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { z } from 'zod';
 import { useQuery } from '@tanstack/react-query';
+import { endPoints } from '../end-points';
 
 const ImageFormatSchema = z.object({
   name: z.string(),
@@ -93,7 +94,7 @@ export const getPosts = async ({
   pageSize: number;
   query?: string;
 }) => {
-  const { data } = await Client.get<PostsResponse>('/posts', {
+  const { data } = await Client.get<PostsResponse>(endPoints.posts, {
     params: {
       populate: '*',
       'pagination[pageSize]': pageSize,

@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { z } from 'zod';
+import { endPoints } from '../end-points';
 
 const ImageSchema = z.object({
   name: z.string(),
@@ -52,11 +53,15 @@ export const uploadImage = async ({
   const formData = new FormData();
   formData.set('files', image);
 
-  const { data } = await Client.post<UploadImageResponse>('/upload', formData, {
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-  });
+  const { data } = await Client.post<UploadImageResponse>(
+    endPoints.uploadImage,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    }
+  );
 
   return UploadImageSchema.parse(data);
 };

@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { z } from 'zod';
 import { useQuery } from '@tanstack/react-query';
+import { endPoints } from '../end-points';
 
 export const UserInfoSchema = z.object({
   id: z.number(),
@@ -16,7 +17,7 @@ export const UserInfoSchema = z.object({
 export type UserInfoResponse = z.infer<typeof UserInfoSchema>;
 
 export const getUserInfo = async ({ jwt }: { jwt: string }) => {
-  const { data } = await Client.get<UserInfoResponse>('/users/me', {
+  const { data } = await Client.get<UserInfoResponse>(endPoints.userInfo, {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },

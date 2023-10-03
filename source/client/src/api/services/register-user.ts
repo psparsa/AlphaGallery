@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
 import { UserInfoSchema } from './get-user-info';
+import { endPoints } from '../end-points';
 
 export const RegisterUserSchema = z.object({
   jwt: z.string(),
@@ -16,7 +17,7 @@ export const registerUser = async ({
   password,
 }: Record<'username' | 'email' | 'password', string>) => {
   const { data } = await Client.post<RegisterUserResponse>(
-    '/auth/local/register',
+    endPoints.registerUser,
     {
       username,
       email,
