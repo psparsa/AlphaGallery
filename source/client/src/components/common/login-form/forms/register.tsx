@@ -7,7 +7,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { isAxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { registerUser } from '@/api';
-import { useAuth } from '@/utils/use-auth';
+import { useAuth } from '@/auth/use-auth';
 
 const schema = z.object({
   email: z
@@ -28,7 +28,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export const Register = () => {
-  const { loginUser } = useAuth({});
+  const { login } = useAuth();
   const {
     control,
     handleSubmit,
@@ -46,7 +46,7 @@ export const Register = () => {
   const onSubmit = useDebouncedCallback(async (formValues: FormValues) => {
     try {
       const { jwt } = await registerUser(formValues);
-      loginUser({ jwt });
+      login({ jwt });
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response) {

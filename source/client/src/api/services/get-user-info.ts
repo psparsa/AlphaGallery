@@ -30,10 +30,12 @@ export const useUserInfo = ({
   initialData,
   jwt,
   onError,
+  onSuccess,
 }: {
   initialData?: UserInfoResponse;
   jwt?: string;
   onError: (error: unknown) => void;
+  onSuccess: (result: UserInfoResponse) => void;
 }) =>
   useQuery({
     queryKey: ['usr-info'],
@@ -45,4 +47,5 @@ export const useUserInfo = ({
     // always will be false, which is not true as initialData is optional
     ...(initialData ? { initialData } : undefined),
     onError,
+    onSuccess,
   });

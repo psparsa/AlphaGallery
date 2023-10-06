@@ -12,7 +12,7 @@ import {
 } from '@/api';
 import { GetServerSideProps } from 'next';
 import { Pagination } from '@/components/common';
-import { useAuth } from '@/utils/use-auth';
+import { useAuth } from '@/auth/use-auth';
 import { Button } from '@/components/common';
 import Link from 'next/link';
 import { NoPostCard } from '@/components/common';
@@ -56,11 +56,11 @@ export default function HomePage({
   initialPosts,
   initialUserData,
 }: HomePageProperties) {
-  const { isAuthenticated, userDataIsLoading } = useAuth({ initialUserData });
+  const { isAuthenticated, isUserDataLoading } = useAuth();
 
   React.useEffect(() => {
-    console.log({ isAuthenticated, userDataIsLoading });
-  }, [isAuthenticated, userDataIsLoading]);
+    console.log({ isAuthenticated, isUserDataLoading });
+  }, [isAuthenticated, isUserDataLoading]);
 
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState('');
@@ -99,6 +99,28 @@ export default function HomePage({
     scrollToBottom();
   };
 
+  const renderNavButtons = () => {
+    if (isAuthenticated)
+      return (
+        <>
+          <Button variant="dark">Logout</Button>
+          <Link href="/upload">
+            <Button variant="dark" containerClassName="ml-2">
+              Upload
+            </Button>
+          </Link>
+        </>
+      );
+
+    if (isUserDataLoading) return <Button variant="dark">Loading...</Button>;
+
+    return (
+      <Link href="/login">
+        <Button variant="dark">Login</Button>
+      </Link>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -115,20 +137,7 @@ export default function HomePage({
         justify-center bg-chineseBlackVoid"
         >
           <header className="fixed top-0 left-0 flex w-screen px-4 py-3">
-            {isAuthenticated ? (
-              <>
-                <Button variant="dark">Logout</Button>
-                <Link href="/upload">
-                  <Button variant="dark" containerClassName="ml-2">
-                    Upload
-                  </Button>
-                </Link>
-              </>
-            ) : (
-              <Link href="/login">
-                <Button variant="dark">Login</Button>
-              </Link>
-            )}
+            {renderNavButtons()}
           </header>
           <div
             className="flex w-full flex-1 flex-col items-center

@@ -4,7 +4,7 @@ import { Button } from '@/components/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { login as loginAccount } from '@/api';
-import { useAuth } from '@/utils/use-auth';
+import { useAuth } from '@/auth/use-auth';
 import { isAxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { useDebouncedCallback } from 'use-debounce';
@@ -23,7 +23,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export const Login = () => {
-  const { loginUser } = useAuth({});
+  const { login } = useAuth();
   const {
     control,
     handleSubmit,
@@ -44,7 +44,7 @@ export const Login = () => {
         password: formValues.password,
       });
 
-      loginUser({ jwt });
+      login({ jwt });
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response) {
