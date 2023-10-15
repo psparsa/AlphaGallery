@@ -3,10 +3,11 @@ import { UseMutationOptions } from '@/api/use-mutation-options';
 import { useMutation } from '@tanstack/react-query';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { authServices } from './auth.services';
-import { RegisterUserRequirements } from './auth.types';
+import { LoginUserRequirements, RegisterUserRequirements } from './auth.types';
 
 export const authQueryKeys = createQueryKeys('auth', {
   registerUser: null,
+  loginUser: (identifer: string) => [identifer],
 });
 
 export type UseRegisterUserOptions = UseMutationOptions<
@@ -15,11 +16,24 @@ export type UseRegisterUserOptions = UseMutationOptions<
   RegisterUserRequirements
 >;
 
-export const authHooks = Object.freeze({
+export type UseLoginUserOptions = UseMutationOptions<
+  Awaited<ReturnType<typeof authServices.loginUser>>,
+  unknown,
+  LoginUserRequirements
+>;
+
+export const authHooks = {
   useRegisterUser: (options?: UseRegisterUserOptions) =>
     useMutation({
       ...options,
       mutationFn: authServices.registerUser,
       mutationKey: authQueryKeys.registerUser.queryKey,
     }),
-});
+
+  useLoginUser: (options?: UseLoginUserOptions) =>
+    useMutation({
+      ...options,
+      mutationFn: authServices.loginUser,
+      mutationKey: authQueryKeys.loginUser('').queryKey,
+    }),
+};

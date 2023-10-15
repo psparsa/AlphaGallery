@@ -7,3 +7,10 @@ export interface RegisterUserRequirements {
 export interface UserRegistrationResult {
   token: string;
 }
+
+export interface LoginUserRequirements {
+  identifier: string;
+  password: string;
+}
+
+export type LoginUserResult = UserRegistrationResult;

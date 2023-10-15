@@ -10,3 +10,10 @@ export interface ApiUserRegistrationRequestBody {
   password: string;
   username: string;
 }
+
+export type ApiLoginUserResponse = ApiUserRegistrationResponse;
+
+export interface ApiLoginUserRequestBody {
+  identifier: string;
+  password: string;
+}

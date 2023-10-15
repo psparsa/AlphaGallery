@@ -3,11 +3,11 @@ import { Input } from '@/components/common';
 import { Button } from '@/components/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { login as loginAccount } from '@/api';
 import { useAuth } from '@/auth/use-auth';
 import { isAxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { useDebouncedCallback } from 'use-debounce';
+import { authServices } from '@/api/services/auth/auth.services';
 
 const schema = z.object({
   username: z
@@ -39,12 +39,12 @@ export const Login = () => {
 
   const onSubmit = useDebouncedCallback(async (formValues: FormValues) => {
     try {
-      const { jwt } = await loginAccount({
+      const { token } = await authServices.loginUser({
         identifier: formValues.username,
         password: formValues.password,
       });
 
-      login({ jwt });
+      login({ jwt: token });
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response) {
