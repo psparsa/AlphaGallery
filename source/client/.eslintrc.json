@@ -1,5 +1,4 @@
 {
-  "plugins": ["prettier"],
   "parserOptions": {
     "project": ["./tsconfig.json"]
   },
@@ -15,7 +14,6 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
     "linebreak-style": "off"
   }
 }
