@@ -8,15 +8,12 @@ import {
 } from './auth.types';
 
 import {
-  ApiUserRegistrationRequestBody,
-  ApiUserRegistrationResponse,
-} from '@/api/response-types/user-registeratin';
-
-import {
   ApiLoginUserRequestBody,
   ApiLoginUserResponse,
-} from '@/api/response-types/user-login';
-import { ApiUserInformationResponse } from '@/api/response-types/user-information';
+  ApiUserInformationResponse,
+  ApiUserRegistrationRequestBody,
+  ApiUserRegistrationResponse,
+} from '@/api/api-types/user-api-types';
 
 export const authMappers = Object.freeze({
   registerUser: {
