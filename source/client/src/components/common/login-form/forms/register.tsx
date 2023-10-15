@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useDebouncedCallback } from 'use-debounce';
 import { isAxiosError } from 'axios';
 import { toast } from 'react-toastify';
-import { registerUser } from '@/api';
 import { useAuth } from '@/auth/use-auth';
+import { authServices } from '@/api/services/auth/auth.services';
 
 const schema = z.object({
   email: z
@@ -45,8 +45,8 @@ export const Register = () => {
 
   const onSubmit = useDebouncedCallback(async (formValues: FormValues) => {
     try {
-      const { jwt } = await registerUser(formValues);
-      login({ jwt });
+      const { token } = await authServices.registerUser(formValues);
+      login({ jwt: token });
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response) {
