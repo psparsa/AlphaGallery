@@ -14,3 +14,13 @@ export interface LoginUserRequirements {
 }
 
 export type LoginUserResult = UserRegistrationResult;
+
+export interface UserInformationResult {
+  email: string;
+  id: number;
+  username: string;
+}
+
+export interface GetUserInformationRequirements {
+  token?: string;
+}

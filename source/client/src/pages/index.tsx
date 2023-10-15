@@ -3,13 +3,7 @@ import { Search, ScrollButton, Card } from '@/components/common';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
 import Head from 'next/head';
-import {
-  getPosts,
-  getUserInfo,
-  PostsResponse,
-  useGetPosts,
-  UserInfoResponse,
-} from '@/api';
+import { getPosts, PostsResponse, useGetPosts } from '@/api';
 import { GetServerSideProps } from 'next';
 import { Pagination } from '@/components/common';
 import { useAuth } from '@/auth/use-auth';
@@ -26,36 +20,17 @@ const scrollToBottom = () => {
 
 interface HomePageProperties {
   initialPosts: PostsResponse;
-  initialUserData?: UserInfoResponse;
 }
 
 export const getServerSideProps: GetServerSideProps<
   HomePageProperties
-> = async (context) => {
-  const token = context.req.cookies.token;
-  const posts = await getPosts({ page: 1, pageSize: 3 });
+> = async () => ({
+  props: {
+    initialPosts: await getPosts({ page: 1, pageSize: 3 }),
+  },
+});
 
-  if (!token)
-    return {
-      props: {
-        initialPosts: posts,
-      },
-    };
-
-  const userData = await getUserInfo({ jwt: token }).catch(console.error);
-
-  return {
-    props: {
-      initialPosts: posts,
-      ...(userData ? { initialUserData: userData } : undefined),
-    },
-  };
-};
-
-export default function HomePage({
-  initialPosts,
-  initialUserData,
-}: HomePageProperties) {
+export default function HomePage({ initialPosts }: HomePageProperties) {
   const { isAuthenticated, isUserDataLoading } = useAuth();
 
   React.useEffect(() => {

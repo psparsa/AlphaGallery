@@ -1,4 +1,5 @@
-import { UserInfoResponse, useUserInfo } from '@/api';
+import { authHooks } from '@/api/services/auth/auth.hooks';
+import { UserInformationResult } from '@/api/services/auth/auth.types';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -6,7 +7,7 @@ import React from 'react';
 type AuthState =
   | {
       isAuthenticated: true;
-      userInfo: UserInfoResponse;
+      userInfo: UserInformationResult;
     }
   | {
       isAuthenticated: false;
@@ -14,7 +15,7 @@ type AuthState =
     };
 
 interface AuthAction {
-  payload: UserInfoResponse;
+  payload: UserInformationResult;
   type: 'set-user-info';
 }
 
@@ -53,13 +54,18 @@ export const AuthProvider = ({ children }: AuthProviderProperties) => {
     authInitialState
   );
 
-  const { isLoading, isFetching } = useUserInfo({
-    jwt: token,
-    onError: () => Cookies.remove('token'),
-    onSuccess: (result) => {
-      authDispatch({ type: 'set-user-info', payload: result });
-    },
-  });
+  const { isLoading, isFetching } = authHooks.useUserInfo(
+    { token },
+    {
+      enabled: !!token,
+      retry: 3,
+      retryDelay: 500,
+      onError: () => Cookies.remove('token'),
+      onSuccess: (result) => {
+        authDispatch({ type: 'set-user-info', payload: result });
+      },
+    }
+  );
 
   const login: AuthContext['login'] = ({ jwt }) => {
     Cookies.set('token', jwt);
