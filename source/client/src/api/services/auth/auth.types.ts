@@ -3,3 +3,7 @@ export interface RegisterUserRequirements {
   password: string;
   username: string;
 }
+
+export interface UserRegistrationResult {
+  token: string;
+}
