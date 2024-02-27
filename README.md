@@ -25,7 +25,7 @@ cd source/server
 cp .env.example .env
 ```
 
-#### Build development container:
+#### Build development containers:
 
 ```bash
 docker compose -f ./docker-compose.dev.yml up

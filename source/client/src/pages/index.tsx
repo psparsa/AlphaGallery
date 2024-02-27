@@ -13,6 +13,7 @@ import { NotFoundCard } from '@/components/common';
 import { PostsResult } from '@/api/services/post/post.types';
 import { postServices } from '@/api/services/post/post.services';
 import { postHooks } from '@/api/services/post/post.hooks';
+import { IMAGE_SERVER } from '@/constants/image-server';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -53,9 +54,6 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
   );
 
   const getCards = () => {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const IMAGE_SERVER = `${process.env.NEXT_PUBLIC_IMAGE_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_IMAGE_SERVER_HOSTNAME}:${process.env.NEXT_PUBLIC_IMAGE_SERVER_PORT}`;
-
     if (posts && posts.data.length > 0)
       return posts.data.map((post) => (
         <Card
