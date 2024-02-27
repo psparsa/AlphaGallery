@@ -57,11 +57,14 @@ export const postServices = {
 
       return HttpClient<ApiPublishPostResponse>({
         method: 'POST',
+        url: endPoints.publishPost,
         data: {
-          title,
-          description,
-          categories: categoriesId,
-          image: imageId,
+          data: {
+            title,
+            description,
+            categories: categoriesId,
+            image: imageId,
+          },
         },
         headers: {
           Authorization: token ? `Bearer ${token}` : undefined,
