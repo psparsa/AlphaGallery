@@ -11,11 +11,11 @@ import { ImageInput } from '@/components/common';
 import * as z from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { publishPost } from '@/api';
 import Cookies from 'js-cookie';
 import { isAxiosError } from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { postServices } from '@/api/services/post/post.services';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -66,13 +66,13 @@ const UploadPage = () => {
 
     if (imageFileReference.current && token) {
       try {
-        const { data } = await publishPost({
+        const { data } = await postServices.publish({
           title: formValues.title,
           description: formValues.description,
           // TODO: categoriesId should be dynamic!
           categoriesId: 5,
           image: imageFileReference.current,
-          jwt: token,
+          token,
         });
 
         const wasSuccessful = data.id;

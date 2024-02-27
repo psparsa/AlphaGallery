@@ -1,4 +1,8 @@
-import { ApiPostsResponse } from '@/api/api-types/posts-api-types';
+import {
+  ApiPostsResponse,
+  ApiPublishPostResponse,
+  ApiUploadImageResponse,
+} from '@/api/api-types/posts-api-types';
 
 export interface GetPostsRequirements {
   keyword?: string;
@@ -6,5 +10,21 @@ export interface GetPostsRequirements {
   pageSize: number;
 }
 
-// Lets don't change it for now
 export type PostsResult = ApiPostsResponse;
+
+export interface PublishPostRequirements {
+  categoriesId: number[] | number;
+  description: string;
+  image: File;
+  title: string;
+  token?: string;
+}
+
+export type PublishPostResult = ApiPublishPostResponse;
+
+export interface UploadImageRequirements {
+  file: File;
+  token?: string;
+}
+
+export type UploadImageResult = ApiUploadImageResponse;

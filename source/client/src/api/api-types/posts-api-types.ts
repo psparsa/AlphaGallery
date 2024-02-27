@@ -5,7 +5,7 @@ export interface ApiGetAllTypesRequestParameters {
   populate: '*';
 }
 
-interface ImageFormat {
+interface Image {
   ext: string;
   hash: string;
   height: number;
@@ -17,33 +17,33 @@ interface ImageFormat {
   width: number;
 }
 
-interface ImageSchema {
-  data: {
-    attributes: {
-      alternativeText: null;
-      caption: null;
-      createdAt: string;
-      ext: string;
-      formats: {
-        large?: ImageFormat;
-        medium?: ImageFormat;
-        small?: ImageFormat;
-        thumbnail: ImageFormat;
-      };
-      hash: string;
-      height: number;
-      mime: string;
-      name: string;
-      previewUrl: null;
-      provider: string;
-      provider_metadata: null;
-      size: number;
-      updatedAt: string;
-      url: string;
-      width: number;
-    };
-    id: number;
+interface ImageAttributes {
+  alternativeText: null;
+  caption: null;
+  createdAt: string;
+  ext: string;
+  formats: {
+    large?: Image;
+    medium?: Image;
+    small?: Image;
+    thumbnail: Image;
   };
+  hash: string;
+  height: number;
+  mime: string;
+  name: string;
+  previewUrl: null;
+  provider: string;
+  provider_metadata: null;
+  size: number;
+  updatedAt: string;
+  url: string;
+  width: number;
+}
+
+interface ImageSchema {
+  attributes: ImageAttributes;
+  id: number;
 }
 
 interface ImageCategory {
@@ -62,7 +62,9 @@ interface PostAttributes {
   };
   createdAt: string;
   description: string;
-  image: ImageSchema;
+  image: {
+    data: ImageSchema;
+  };
   publishedAt: string;
   title: string;
   updatedAt: string;
@@ -84,3 +86,25 @@ export interface ApiPostsResponse {
     pagination: ImagePagination;
   };
 }
+
+export interface ApiPublishPostResponse {
+  data: {
+    attributes: {
+      createdAt: string;
+      description: string;
+      publishedAt: string;
+      title: string;
+      updatedAt: string;
+    };
+    id: number;
+  };
+}
+
+export interface ApiPublishPostRequestBody {
+  categoriesId: number[] | number;
+  description: string;
+  imageId: number;
+  title: string;
+}
+
+export type ApiUploadImageResponse = (ImageAttributes & { id: number })[];
