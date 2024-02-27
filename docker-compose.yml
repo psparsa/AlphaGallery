@@ -9,7 +9,7 @@ services:
         - API_HOSTNAME=$WEBSITE_ORIGIN
         - API_PORT=1337
         - API_ADDRESS_SERVER_SIDE=http://server:1337/api
-        - API_ADDRESS_CLIENT_SIDE=http://${WEBSITE_ORIGIN}:1337/api
+        - API_ADDRESS_CLIENT_SIDE=${WEBSITE_ORIGIN}:1337/api
     ports:
       - "8080:3000"
     depends_on:
