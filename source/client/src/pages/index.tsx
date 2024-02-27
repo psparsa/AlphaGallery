@@ -54,7 +54,7 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
 
   const getCards = () => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const API_ADDRESS = `${process.env.NEXT_PUBLIC_API_PROTOCOL}://${process.env.NEXT_PUBLIC_API_HOSTNAME}:${process.env.NEXT_PUBLIC_API_PORT}`;
+    const IMAGE_SERVER = `${process.env.NEXT_PUBLIC_IMAGE_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_IMAGE_SERVER_HOSTNAME}:${process.env.NEXT_PUBLIC_IMAGE_SERVER_PORT}`;
 
     if (posts && posts.data.length > 0)
       return posts.data.map((post) => (
@@ -64,7 +64,7 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
           )}
           description={post.attributes.description}
           title={post.attributes.title}
-          imageSrc={`${API_ADDRESS}${post.attributes.image.data.attributes.url}`}
+          imageSrc={`${IMAGE_SERVER}${post.attributes.image.data.attributes.url}`}
           key={post.id}
           containerClassName="mx-4 my-8"
         />

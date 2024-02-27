@@ -5,9 +5,9 @@ services:
     build:
       context: ./source/client
       args:
-        - API_PROTOCOL=http
-        - API_HOSTNAME=$WEBSITE_ORIGIN
-        - API_PORT=1337
+        - IMAGE_SERVER_PROTOCOL=http
+        - IMAGE_SERVER_HOSTNAME=server
+        - IMAGE_SERVER_PORT=1337
         - API_ADDRESS_SERVER_SIDE=http://server:1337/api
         - API_ADDRESS_CLIENT_SIDE=${WEBSITE_ORIGIN}:1337/api
     ports:
