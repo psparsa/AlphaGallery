@@ -1,53 +1,50 @@
-# 🟥 This project is currently undergoing active refactoring to improve its structure and functionality.
-
-![Banner](https://github.com/psparsa/AlphaGallery/assets/57572461/aff8122b-541e-4e3c-9a87-32e75d765bf9)
+![AlphaGallery](https://github.com/psparsa/AlphaGallery/assets/57572461/dc2bba21-c6e7-4bad-92fa-ca915d042a81)
 
 <p align="center">
 A minimal image uploading website built with Next.js and Starpi, styled with Tailwind CSS and tested with Jest/RTL.
 </p>
 
-## Getting started:
+## 👼 First thing first:
 
-Hint: If you run `npm install` in the root directory of the repository, both projects' dependencies will be installed and Husky will also be enabled!
-
-#### Server:
+#### Initialize GIT hooks:
 
 ```bash
+npm install
+npm run prepare
+```
+
+## 👷 Development:
+
+#### Populate `.env` files:
+
+```bash
+cp .env.example .env
+
+# And for strapi server:
 cd source/server
-# populate the .env file
 cp .env.example .env
-npm run develop
 ```
 
-#### Client:
+#### Build development container:
 
 ```bash
-cd source/client
-npm run dev
+docker compose -f ./docker-compose.dev.yml up
 ```
 
-#### 🐳 Deployment:
+## 📦 Deployment:
+
+#### Populate `.env` files:
 
 ```bash
-# populate the .env file
 cp .env.example .env
+
+# And for strapi server:
+cd source/server
+cp .env.example .env
+```
+
+#### Build production containers:
+
+```bash
 docker compose up
 ```
-
-<hr />
-
-### **❗️ Note:**
-
-After running strapi server, you have to set some permissions for guest and authenticated users.
-
-Settings Path:
-_Strapi Admin Panel > Settings > Users & Permissions plugin > Roles_
-
-| Roles         | Allowed Actions                                    |
-| ------------- | -------------------------------------------------- |
-| Authenticated | Post: create<br><br>Upload: upload                 |
-| Public        | Post: find, findOne<br><br>Category: find, findOne |
-
-**Example:**
-
-https://user-images.githubusercontent.com/57572461/228605529-4ee769b0-2279-49da-b98b-80de8b0476a1.mp4
