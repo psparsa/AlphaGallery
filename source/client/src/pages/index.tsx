@@ -3,7 +3,6 @@ import { Search, ScrollButton, Card } from '@/components/common';
 import { Roboto } from '@next/font/google';
 import { twMerge } from 'tailwind-merge';
 import Head from 'next/head';
-import { getPosts, PostsResponse, useGetPosts } from '@/api';
 import { GetServerSideProps } from 'next';
 import { Pagination } from '@/components/common';
 import { useAuth } from '@/auth/use-auth';
@@ -11,6 +10,9 @@ import { Button } from '@/components/common';
 import Link from 'next/link';
 import { NoPostCard } from '@/components/common';
 import { NotFoundCard } from '@/components/common';
+import { PostsResult } from '@/api/services/post/post.types';
+import { postServices } from '@/api/services/post/post.services';
+import { postHooks } from '@/api/services/post/post.hooks';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -19,14 +21,14 @@ const scrollToBottom = () => {
 };
 
 interface HomePageProperties {
-  initialPosts: PostsResponse;
+  initialPosts: PostsResult;
 }
 
 export const getServerSideProps: GetServerSideProps<
   HomePageProperties
 > = async () => ({
   props: {
-    initialPosts: await getPosts({ page: 1, pageSize: 3 }),
+    initialPosts: await postServices.getPosts({ page: 1, pageSize: 3 }),
   },
 });
 
@@ -39,12 +41,16 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
 
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState('');
-  const { data: posts } = useGetPosts({
-    page,
-    pageSize: 3,
-    initialData: initialPosts,
-    query,
-  });
+  const { data: posts } = postHooks.usePosts(
+    {
+      page,
+      pageSize: 3,
+      keyword: query,
+    },
+    {
+      initialData: initialPosts,
+    }
+  );
 
   const getCards = () => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
