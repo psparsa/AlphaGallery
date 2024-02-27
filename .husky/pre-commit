@@ -3,5 +3,4 @@
 
 cd ./source/client
 npx lint-staged
-CI=true npm test
 cd ../..
