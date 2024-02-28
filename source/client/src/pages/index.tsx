@@ -14,6 +14,7 @@ import { PostsResult } from '@/api/services/post/post.types';
 import { postServices } from '@/api/services/post/post.services';
 import { postHooks } from '@/api/services/post/post.hooks';
 import { IMAGE_SERVER } from '@/constants/image-server';
+import R from 'ramda';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -41,12 +42,12 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
   }, [isAuthenticated, isUserDataLoading]);
 
   const [page, setPage] = React.useState(1);
-  const [query, setQuery] = React.useState('');
+  const [keyword, setKeyword] = React.useState('');
   const { data: posts } = postHooks.usePosts(
     {
       page,
       pageSize: 3,
-      keyword: query,
+      keyword,
     },
     {
       initialData: initialPosts,
@@ -54,7 +55,7 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
   );
 
   const getCards = () => {
-    if (posts && posts.data.length > 0)
+    if (R.isNotNil(posts) && !R.isEmpty(posts.data))
       return posts.data.map((post) => (
         <Card
           categories={post.attributes.categories.data.map(
@@ -68,13 +69,13 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
         />
       ));
 
-    if (query.length > 0) return <NotFoundCard />;
+    if (!R.isEmpty(keyword)) return <NotFoundCard />;
 
     return <NoPostCard />;
   };
 
   const handleSearch = (q: string) => {
-    setQuery(q);
+    setKeyword(q);
     scrollToBottom();
   };
 
