@@ -1,5 +1,6 @@
 import { authHooks } from '@/api/services/auth/auth.hooks';
 import { UserInformationResult } from '@/api/services/auth/auth.types';
+import { COOKIE_STORAGE_KEYS } from '@/constants/cookie-storage-keys';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -14,10 +15,14 @@ type AuthState =
       userInfo: undefined;
     };
 
-interface AuthAction {
-  payload: UserInformationResult;
-  type: 'set-user-info';
-}
+type AuthAction =
+  | {
+      payload: UserInformationResult;
+      type: 'set-user-info';
+    }
+  | {
+      type: 'clear-user-info';
+    };
 
 const authInitialState: AuthState = {
   isAuthenticated: false,
@@ -29,6 +34,12 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     case 'set-user-info': {
       return { ...state, isAuthenticated: true, userInfo: action.payload };
     }
+    case 'clear-user-info': {
+      return {
+        isAuthenticated: false,
+        userInfo: undefined,
+      };
+    }
     default: {
       return state;
     }
@@ -38,6 +49,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 export type AuthContext = AuthState & {
   isUserDataLoading: boolean;
   login: (values: { jwt: string }) => void;
+  logout: () => void;
 };
 
 export const AuthContext = React.createContext({} as unknown as AuthContext);
@@ -68,8 +80,15 @@ export const AuthProvider = ({ children }: AuthProviderProperties) => {
   );
 
   const login: AuthContext['login'] = ({ jwt }) => {
-    Cookies.set('token', jwt);
+    Cookies.set(COOKIE_STORAGE_KEYS.token, jwt);
     setToken(jwt);
+    void router.replace('/');
+  };
+
+  const logout: AuthContext['logout'] = () => {
+    Cookies.remove(COOKIE_STORAGE_KEYS.token);
+    setToken(undefined);
+    authDispatch({ type: 'clear-user-info' });
     void router.replace('/');
   };
 
@@ -78,6 +97,7 @@ export const AuthProvider = ({ children }: AuthProviderProperties) => {
       value={{
         ...authState,
         login,
+        logout,
         isUserDataLoading: isLoading && isFetching,
       }}
     >

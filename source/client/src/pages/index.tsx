@@ -14,7 +14,7 @@ import { PostsResult } from '@/api/services/post/post.types';
 import { postServices } from '@/api/services/post/post.services';
 import { postHooks } from '@/api/services/post/post.hooks';
 import { IMAGE_SERVER } from '@/constants/image-server';
-import R from 'ramda';
+import * as R from 'ramda';
 
 const roboto = Roboto({ weight: ['300', '400'], subsets: ['latin'] });
 
@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps<
 });
 
 export default function HomePage({ initialPosts }: HomePageProperties) {
-  const { isAuthenticated, isUserDataLoading } = useAuth();
+  const { isAuthenticated, isUserDataLoading, logout } = useAuth();
 
   React.useEffect(() => {
     console.log({ isAuthenticated, isUserDataLoading });
@@ -83,7 +83,9 @@ export default function HomePage({ initialPosts }: HomePageProperties) {
     if (isAuthenticated)
       return (
         <>
-          <Button variant="dark">Logout</Button>
+          <Button variant="dark" onClick={logout}>
+            Logout
+          </Button>
           <Link href="/upload">
             <Button variant="dark" containerClassName="ml-2">
               Upload
