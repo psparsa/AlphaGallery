@@ -31,6 +31,15 @@ cp .env.example .env
 docker compose -f ./docker-compose.dev.yml up
 ```
 
+Then open http://127.0.0.1:8080 to see the webpage.
+
+#### Run unit test cases:
+
+```bash
+cd source/client
+npm test
+```
+
 ## 📦 Deployment:
 
 #### Populate `.env` files:
